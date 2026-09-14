@@ -364,6 +364,7 @@ textarea{
   padding:.42rem 0;border-bottom:1px solid rgba(62,58,52,.07)}
 .mo .lbl{font-size:.8rem;color:var(--ink-3);padding-top:.22rem}
 .mo.freewk .lbl{color:var(--ink-2)}
+.mo.past{opacity:.38}
 .mo .slots{display:flex;flex-wrap:wrap;gap:.35rem;min-height:1.5rem}
 .trip{
   display:inline-flex;align-items:baseline;gap:.5rem;max-width:100%;
@@ -563,6 +564,72 @@ const PLACES = [
    {l:'O\u2019Keeffe Museum',u:'https://www.okeeffemuseum.org'},
    {l:'Ojo Caliente',u:'https://ojosparesorts.com/ojo-caliente/'},
    {l:'Balloon Fiesta',u:'https://www.balloonfiesta.com'}
+  ]
+},
+{
+  id:'pr', set:{y:2026,m:12},
+  moment:'Water so clear the board looks like it is floating on nothing.',
+  name:'Puerto Rico \u2014 La Parguera', tag:'Paddleboarding over glass, the week after Christmas',
+  accent:'#2F8CA8', horizon:'islands',
+  region:'La Parguera \u00b7 Lajas \u00b7 southwest coast',
+  days:'8 days', budget:'booked', when:'Dec 26, 2026 \u2013 Jan 2, 2027',
+  why:'Already decided, and the reason the rest of the portfolio exists \u2014 four of you, three generations, on the quiet southwest coast. La Parguera is mangrove cays, warm flat water and one of the last bioluminescent bays in the world you can still swim in. No passport, US dollars, and your Spanish is the local Spanish. The whole point is crystalline water and nowhere to be.',
+  itin:[
+   {d:'1',t:'Fly IND \u2192 San Juan, drive southwest',x:'About two and a half hours across the island to Lajas. Arrive, eat, sleep.',cost:'AA miles, possibly'},
+   {d:'2\u20136',t:'La Parguera',x:'Paddleboarding the mangrove channels and cays, the boardwalk at night, boat out to the bio bay. Flat water, protected, ideal for a mixed-ability group.',cost:'\u2014'},
+   {d:'7',t:'Cabo Rojo',x:'Playa Sucia and the cliffs at Los Morrillos lighthouse \u2014 forty minutes west, and the best beach day on this coast.',cost:'\u2014'},
+   {d:'8',t:'Back to San Juan, fly home',x:'Old San Juan on the way through if the flight is late enough.',cost:'\u2014'}
+  ],
+  stay:[
+   {n:'La Parguera guesthouses and rentals', u:'https://www.discoverpuertorico.com', rate:'varies',
+    x:'A rental with a kitchen suits a party of four across three generations better than hotel rooms do, and puts you on the water.'}
+  ],
+  dontmiss:[
+   'The <b>bioluminescent bay at night</b> \u2014 one of very few where swimming is still allowed.',
+   '<b>Mofongo</b> and fresh fish along the malec\u00f3n.',
+   '<b>Playa Sucia at Cabo Rojo</b> \u2014 white sand under limestone cliffs, and a lighthouse walk.',
+   'The <b>mangrove channels</b> at first light, before any wind gets up. Best paddling of the week.'
+  ],
+  tips:[
+   'Party of four \u2014 you, Camila, Isa and your mother. Pick water and pacing that suit all three generations.',
+   'Christmas week is the busiest of the Puerto Rican year. Lodging and cars go early.',
+   'Check the American miles before paying cash for the flights.'
+  ],
+  links:[
+   {l:'Discover Puerto Rico',u:'https://www.discoverpuertorico.com'},
+   {l:'La Parguera Nature Reserve',u:'https://www.drna.pr.gov'}
+  ]
+},
+{
+  id:'dr', scope:'world', set:{y:2027,m:1},
+  moment:'Being one island away, just in case, and getting a beach out of it.',
+  name:'Dominican Republic', tag:'Near Isa\u2019s softball week, solo',
+  accent:'#B8566E', horizon:'islands',
+  region:'Punta Cana \u00b7 La Romana \u00b7 Juan Dolio',
+  days:'7 days', budget:'in planning', when:'Jan 10\u201316, 2027',
+  why:'Not a holiday so much as a decision \u2014 Isa is in Juan Dolio with her college team for a week of games, and you would rather be an hour away than an ocean away. You do not expect to see her. So the trip has to work on its own terms: a pristine beach, food worth eating, wifi good enough to work, and somewhere quiet without an animation team shouting at the pool.',
+  itin:[
+   {d:'1',t:'Fly into Punta Cana',x:'PUJ, then transfer west toward wherever you settle on. Uber rather than a rental car.',cost:'\u2014'},
+   {d:'2\u20135',t:'Beach, work, and proximity',x:'Mornings on the sand, work when you need to, and the comfort of being close enough if anything comes up.',cost:'\u2014'},
+   {d:'6',t:'Somewhere new',x:'First time in the DR \u2014 worth one day seeing something beyond the resort gate.',cost:'\u2014'},
+   {d:'7',t:'Fly home',x:'\u2014',cost:'\u2014'}
+  ],
+  stay:[
+   {n:'Still deciding', u:'https://www.godominicanrepublic.com', rate:'open',
+    x:'Now open to all-inclusive for this one. Priorities: pristine beach, good food, reliable wifi, quiet property, and no premium-liquor upcharge you would never use.'}
+  ],
+  dontmiss:[
+   '<b>Mangú</b> for breakfast \u2014 mashed plantain with pickled onions, salami and fried cheese.',
+   '<b>Sancocho</b> \u2014 the national stew, worth seeking out away from a buffet.',
+   '<b>Fresh cacao and coffee</b> \u2014 both grown here and both worth bringing home.'
+  ],
+  tips:[
+   'Isa is in Juan Dolio, not Santo Domingo. La Romana sits roughly between there and Punta Cana.',
+   'Uber works well in the resort corridors and is your stated preference over driving.',
+   'Confirm wifi quality directly with the property \u2014 resort wifi is the usual weak point for working.'
+  ],
+  links:[
+   {l:'Go Dominican Republic',u:'https://www.godominicanrepublic.com'}
   ]
 },
 {
@@ -1504,7 +1571,7 @@ function close(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.hidden&&viewEl.classList.contains('open'))close();});
 
-const YEARS=[2027,2028,2029,2030,2031];
+const YEARS=[2026,2027,2028,2029,2030,2031];
 const MON=['January','February','March','April','May','June',
            'July','August','September','October','November','December'];
 const calEl=document.getElementById('cal'), calBody=document.getElementById('calBody');
@@ -1519,23 +1586,25 @@ function drawCal(){
   let html='<div class="years">';
   YEARS.forEach(y=>{
     let rows='';
+    const now=new Date(), nowY=now.getFullYear(), nowM=now.getMonth()+1;
     for(let m=1;m<=12;m++){
-      const solid=PLACES.filter(pl=>{const r=rec(pl.id);return r.plan&&r.plan.y===y&&r.plan.m===m;});
-      const ghosts=PLACES.filter(pl=>!rec(pl.id).plan&&pl.target&&pl.target.y===y&&pl.target.m===m);
+      const past = y<nowY || (y===nowY && m<nowM);
+      const solid=PLACES.filter(pl=>{const r=rec(pl.id);const d=r.plan||pl.set;return d&&d.y===y&&d.m===m;});
+      const ghosts=PLACES.filter(pl=>!rec(pl.id).plan&&!pl.set&&pl.target&&pl.target.y===y&&pl.target.m===m);
       const free = m===7?'free week of the 4th' : m===12?'free week' : '';
-      rows+=`<div class="mo${free?' freewk':''}">
+      rows+=`<div class="mo${free?' freewk':''}${past?' past':''}">
         <span class="lbl">${MON[m-1].slice(0,3)}</span>
         <span class="slots">${solid.map(pl=>chip(pl,false)).join('')}
           ${ghosts.map(pl=>chip(pl,true)).join('')}
           ${free?`<span class="freetag">${free}</span>`:''}</span></div>`;
     }
-    const n=PLACES.filter(pl=>{const r=rec(pl.id);return r.plan&&r.plan.y===y;}).length;
+    const n=PLACES.filter(pl=>{const r=rec(pl.id);const d=r.plan||pl.set;return d&&d.y===y;}).length;
     html+=`<div class="yr"><h3>${y}${y===2029?'<span>15 years at Lilly — 220 hours</span>':
       (n?`<span>${n} trip${n>1?'s':''} placed</span>`:'')}</h3>${rows}</div>`;
   });
   html+='</div>';
 
-  const loose=PLACES.filter(pl=>!rec(pl.id).plan&&!pl.target);
+  const loose=PLACES.filter(pl=>!rec(pl.id).plan&&!pl.target&&!pl.set);
   if(loose.length) html+=`<div class="years"><div class="unplaced">
     <h4>Not placed yet</h4>
     <div class="slots">${loose.map(pl=>chip(pl,true)).join('')}</div></div></div>`;
