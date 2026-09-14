@@ -90,14 +90,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .grouphead::after{content:"";flex:1;height:1px;background:var(--rule)}
 .post{width:100%;margin:0;position:relative;padding-bottom:0}
-.post.last{padding-bottom:5rem}
-.post.last::after{
-  content:"";position:absolute;left:50%;transform:translateX(-50%);
-  bottom:0;width:15px;height:4.6rem;
-  background:linear-gradient(180deg,#B3A895,#8A8071);
-  border-radius:2px;
-  box-shadow:inset -3px 0 0 rgba(62,58,52,.18);
-}
+.post.last{padding-bottom:1.4rem}
 .sign{
   display:block;width:100%;text-align:left;position:relative;
   padding:1.15rem 3.1rem 1.15rem 1.55rem;margin-bottom:.55rem;min-height:86px;
@@ -373,13 +366,22 @@ textarea{
 .mo.freewk .lbl{color:var(--ink-2)}
 .mo .slots{display:flex;flex-wrap:wrap;gap:.35rem;min-height:1.5rem}
 .trip{
-  display:inline-flex;align-items:baseline;gap:.45rem;max-width:100%;
-  padding:.28rem .7rem;border-radius:3px;font-size:.84rem;
-  background:var(--c);border-left:4px solid var(--k);color:var(--ink);
+  display:inline-flex;align-items:baseline;gap:.5rem;max-width:100%;
+  padding:.36rem .85rem;border-radius:3px;font-size:.86rem;font-weight:500;
+  background:var(--k);color:#FAF9F6;border:none;
+  box-shadow:0 1px 3px rgba(62,58,52,.18);
 }
-.trip .dur{font-size:.74rem;color:var(--ink-3)}
-.trip.ghost{background:transparent;border:1px dashed var(--rule);border-left:4px solid var(--k);
-  color:var(--ink-3);font-style:italic}
+.trip .dur{font-size:.75rem;color:rgba(250,249,246,.72);font-weight:400}
+.trip.ghost{
+  background:transparent;border:1px dashed var(--rule);
+  color:var(--ink-3);font-style:italic;font-weight:400;box-shadow:none;
+  padding:.3rem .7rem;
+}
+.trip.ghost .dur{color:var(--ink-3)}
+.trip.ghost::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--k);
+  align-self:center;margin-right:.1rem;opacity:.5;
+}
 .freetag{
   font-size:.7rem;letter-spacing:.04em;color:var(--ink-3);
   border:1px solid var(--rule);border-radius:100px;padding:.16rem .55rem;align-self:center;
@@ -1508,9 +1510,9 @@ const MON=['January','February','March','April','May','June',
 const calEl=document.getElementById('cal'), calBody=document.getElementById('calBody');
 
 function chip(pl,ghost){
-  const t=tint_(pl.accent,.26);
+  const k = ghost ? pl.accent : inkAccent(pl.accent);
   return `<button class="trip${ghost?' ghost':''}" data-go="${pl.id}"
-    style="--c:${t};--k:${pl.accent}">${pl.name}<span class="dur">${pl.days}</span></button>`;
+    style="--k:${k}">${pl.name}<span class="dur">${pl.days}</span></button>`;
 }
 
 function drawCal(){
