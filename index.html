@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Where To Next — a travel portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --linen:#FAF9F6;
+  --linen-2:#F2F1EC;
+  --linen-3:#E4E1D8;
+  --ink:#3E3A34;
+  --ink-2:rgba(62,58,52,.70);
+  --ink-3:rgba(62,58,52,.46);
+  --rule:rgba(62,58,52,.17);
+  --accent:#C1663A;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Karla',system-ui,-apple-system,sans-serif;
+  --wrap:min(760px,100% - 2.4rem);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--ink);
+  background:var(--linen);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(62,58,52,.014) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(62,58,52,.014) 0 1px, transparent 1px 3px);
+  font-family:var(--sans);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:break-word;
+}
+body.locked{overflow:hidden}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.14;margin:0;
+  letter-spacing:-.012em;font-variation-settings:'SOFT' 40,'WONK' 1}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* woven band — an Andean-style hairline border, used sparingly */
+.weave{
+  height:9px;width:100%;
+  background-image:
+    repeating-linear-gradient(45deg, var(--linen-3) 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(-45deg, var(--linen-3) 0 4px, transparent 4px 8px);
+  opacity:.85;
+}
+
+/* ---------- masthead ---------- */
+.masthead{width:var(--wrap);margin:0 auto;padding:3.4rem 0 1.4rem;text-align:center}
+.masthead h1{font-size:clamp(2.6rem,12vw,4.2rem);font-weight:300}
+.masthead h1 em{font-style:italic;font-weight:700}
+.masthead .sub{
+  margin:1.1rem auto 0;max-width:36ch;color:var(--ink-2);
+  font-size:.95rem;line-height:1.6;
+}
+.masthead .meta{
+  margin-top:1.3rem;font-size:.74rem;letter-spacing:.09em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+.syncstate{margin:.6rem 0 0;font-size:.8rem;color:var(--ink-3)}
+.syncstate.good{color:#6E8F63}
+.syncstate.warn{color:#B4802C}
+.setupbtn{
+  margin-top:.5rem;font-size:.8rem;color:var(--ink-2);
+  border-bottom:1px solid var(--rule);padding-bottom:1px;
+}
+.setupbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* ---------- signpost ---------- */
+.postgroup{width:var(--wrap);margin:1.2rem auto 0}
+.postgroup + .postgroup{margin-top:2.4rem}
+.grouphead{
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--serif);font-style:italic;font-size:1rem;
+  color:var(--ink-3);margin-bottom:.9rem;
+}
+.grouphead::after{content:"";flex:1;height:1px;background:var(--rule)}
+.post{width:100%;margin:0;position:relative;padding-bottom:0}
+.post.last{padding-bottom:5rem}
+.post.last::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);
+  bottom:0;width:15px;height:4.6rem;
+  background:linear-gradient(180deg,#B3A895,#8A8071);
+  border-radius:2px;
+  box-shadow:inset -3px 0 0 rgba(62,58,52,.18);
+}
+.sign{
+  display:block;width:100%;text-align:left;position:relative;
+  padding:.95rem 3.1rem .95rem 1.55rem;margin-bottom:.5rem;
+  background:var(--tint);border-radius:3px;
+  color:var(--ink);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 2px 5px rgba(62,58,52,.13);
+  transition:transform .16s ease;
+  clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
+}
+.sign::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:7px;
+  background:var(--sc);
+}
+.sign:nth-child(odd){transform:rotate(-.35deg)}
+.sign:nth-child(even){transform:rotate(.35deg);margin-left:auto;width:calc(100% - 8px)}
+.sign:hover,.sign:focus-visible{transform:rotate(0deg) translateX(4px)}
+.sign .nm{font-family:var(--serif);font-size:1.16rem;font-weight:700;display:block;line-height:1.2}
+.sign .tg{display:block;font-size:.8rem;color:var(--ink-2);margin-top:.1rem}
+.sign .st{
+  position:absolute;right:2.4rem;top:50%;transform:translateY(-50%);
+  width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);
+}
+
+/* ---------- section shells ---------- */
+.band{border-top:1px solid var(--rule);margin-top:2rem;background:var(--linen-2)}
+.wrap{width:var(--wrap);margin:0 auto;padding:2.4rem 0}
+.wrap h2{font-size:1.5rem;margin-bottom:.7rem}
+.lede{color:var(--ink-2);font-size:.95rem;max-width:62ch}
+
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0 0}
+.chip{
+  padding:.34rem .85rem;border:1px solid var(--rule);border-radius:100px;
+  font-size:.8rem;color:var(--ink-2);background:var(--linen);
+}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--linen);border-color:var(--ink)}
+
+/* ---------- chapter view ---------- */
+.view{
+  position:fixed;inset:0;background:var(--linen);z-index:40;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  visibility:hidden;
+}
+.view.open{transform:translateY(0);visibility:visible}
+.viewbar{
+  position:sticky;top:0;z-index:3;background:rgba(250,249,246,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);
+}
+.viewbar .in{
+  width:var(--wrap);margin:0 auto;display:flex;align-items:center;
+  gap:.8rem;padding:.75rem 0;
+}
+.back{font-size:.86rem;color:var(--ink-2);display:flex;align-items:center;gap:.4rem}
+.viewbar .ttl{font-family:var(--serif);font-size:.98rem;font-weight:500;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.hero{position:relative;padding:2.2rem 0 0}
+.hero .in{width:var(--wrap);margin:0 auto}
+.hero .kicker{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--accent)}
+.hero h2{font-size:clamp(2rem,8.5vw,3rem);font-weight:300;margin:.45rem 0 .5rem}
+.hero .tag{font-size:1rem;color:var(--ink-2)}
+.horizon{display:block;width:100%;height:118px;margin-top:1.4rem}
+
+.vitals{
+  width:var(--wrap);margin:0 auto;display:grid;
+  grid-template-columns:repeat(2,1fr);gap:0;
+  border-top:1px solid var(--rule);
+}
+.vital{padding:.9rem 0;border-bottom:1px solid var(--rule)}
+.vital:nth-child(odd){padding-right:1rem}
+.vital:nth-child(even){padding-left:1rem;border-left:1px solid var(--rule)}
+.vital dt{font-size:.74rem;letter-spacing:.06em;color:var(--ink-3)}
+.vital dd{margin:.22rem 0 0;font-family:var(--serif);font-size:1.04rem}
+
+.sec{width:var(--wrap);margin:0 auto;padding:2rem 0 0}
+.sec > h3{
+  font-family:var(--serif);font-size:1.15rem;font-weight:700;
+  color:var(--accent);margin-bottom:.85rem;
+}
+.sec p{font-size:.97rem;color:var(--ink-2)}
+.sec p strong{color:var(--ink);font-weight:700}
+
+.itin{list-style:none;margin:0;padding:0}
+.itin li{
+  display:grid;grid-template-columns:2.9rem 1fr;gap:.9rem;
+  padding:.85rem 0;border-top:1px solid var(--rule);
+}
+.itin li:last-child{border-bottom:1px solid var(--rule)}
+.itin .d{
+  font-family:var(--serif);font-size:1.5rem;color:var(--accent);
+  line-height:1;padding-top:.1rem;
+}
+.itin .t{font-weight:700;font-size:.95rem;display:block;margin-bottom:.15rem}
+.itin .x{font-size:.9rem;color:var(--ink-2);line-height:1.55}
+
+.stays{list-style:none;margin:0;padding:0}
+.stays li{padding:.75rem 0;border-top:1px solid var(--rule);font-size:.93rem;color:var(--ink-2)}
+.stays li:last-child{border-bottom:1px solid var(--rule)}
+.stays b{color:var(--ink);font-weight:700;font-family:var(--serif);font-size:1rem}
+
+.tips{margin:0;padding-left:1.1rem}
+.tips li{font-size:.93rem;color:var(--ink-2);margin-bottom:.5rem}
+.tips li::marker{color:var(--accent)}
+
+.links{display:flex;flex-wrap:wrap;gap:.45rem}
+.links a{
+  text-decoration:none;font-size:.84rem;padding:.42rem .85rem;
+  border:1px solid var(--rule);border-radius:3px;color:var(--ink-2);
+  background:var(--linen-2);
+}
+.links a:hover{border-color:var(--accent);color:var(--ink)}
+
+/* ---------- mood board ---------- */
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-top:.9rem}
+.board figure{margin:0;position:relative;aspect-ratio:4/3;overflow:hidden;
+  border-radius:3px;background:var(--linen-2);box-shadow:0 1px 4px rgba(62,58,52,.12)}
+.board img{width:100%;height:100%;object-fit:cover;display:block}
+.board .rm{
+  position:absolute;top:.3rem;right:.3rem;width:24px;height:24px;
+  border-radius:50%;background:rgba(62,58,52,.72);color:#FBF7F0;font-size:.85rem;line-height:1;
+}
+.addimg{display:flex;gap:.4rem;margin-top:.7rem}
+.addimg input{
+  flex:1;min-width:0;background:#FBF7F0;border:1px solid var(--rule);
+  color:var(--ink);padding:.55rem .7rem;border-radius:3px;font:inherit;font-size:.86rem;
+}
+.addimg button{
+  padding:.55rem 1rem;background:var(--accent);color:#FBF7F0;border-radius:3px;
+  font-size:.86rem;font-weight:700;
+}
+.hint{font-size:.8rem;color:var(--ink-3);margin-top:.55rem}
+
+/* ---------- notes + status ---------- */
+textarea{
+  width:100%;background:#FBF7F0;border:1px solid var(--rule);color:var(--ink);
+  border-radius:3px;padding:.8rem;font:inherit;font-size:.93rem;min-height:110px;resize:vertical;
+}
+.statusrow{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.statusrow button{
+  padding:.4rem .9rem;border:1px solid var(--rule);border-radius:100px;
+  font-size:.83rem;color:var(--ink-2);background:var(--linen-2);
+}
+.statusrow button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
+  color:#FBF7F0;font-weight:700}
+.saved{font-size:.78rem;color:var(--ink-3);margin-top:.45rem;min-height:1.1em}
+
+.foot{width:var(--wrap);margin:2.6rem auto 0;padding:1.6rem 0 4rem;
+  border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-3)}
+
+
+/* ---------- whimsy ---------- */
+.sunart{display:block;width:200px;max-width:62%;height:auto;margin:0 auto .4rem;color:var(--ink-3)}
+.sign .nail{
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  background:rgba(62,58,52,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.4);
+}
+.sign .nail.a{left:.85rem;top:.5rem}
+.sign .nail.b{left:.85rem;bottom:.5rem}
+.sign .st{display:flex;align-items:center;justify-content:center;border:none;
+  width:17px;height:17px;color:var(--sd);background:none;box-shadow:none;border-radius:0}
+.sign .st svg{width:17px;height:17px;display:block}
+.grouphead .gi{width:19px;height:19px;flex:none;color:var(--ink-3)}
+.emptystate{text-align:center;padding:2.4rem 0;color:var(--ink-2)}
+.emptystate svg{width:54px;height:54px;color:var(--ink-3);margin-bottom:.6rem}
+
+@media (min-width:680px){
+  .board{grid-template-columns:repeat(3,1fr)}
+  .vitals{grid-template-columns:repeat(4,1fr)}
+  .vital:nth-child(even){padding-left:0;border-left:none}
+  .vital{padding-right:1rem;border-left:1px solid var(--rule);padding-left:1rem}
+  .vital:first-child{border-left:none;padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important}
+  .sign:nth-child(odd),.sign:nth-child(even){transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="sunart" viewBox="0 0 200 74" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M100 40 q-9-9 0-18 q9 9 0 18Z" transform="translate(0,-2)"/>
+      <circle cx="100" cy="30" r="11.4"/>
+      <path d="M100 11.5 v-5.5 M100 54 v5 M81 30 h-6 M125 30 h6
+               M86.4 16.8 l-4-4.2 M113.2 43.6 l4.3 4.1
+               M113.4 16.6 l4.1-4.2 M86.6 43.4 l-4.2 4.2"/>
+      <path d="M34 50 q6-6 12 0 q6-6 12 0"/>
+      <path d="M146 58 q5-5 10 0 q5-5 10 0"/>
+      <path d="M22 63 q4.5-4.5 9 0 q4.5-4.5 9 0" opacity=".55"/>
+    </g>
+  </svg>
+  <h1>Where <em>to</em> next</h1>
+  <p class="sub">Places that look, sound and feel like nothing in Indiana. Ten across this country, and two that are worth the passport. Pick a sign.</p>
+  <p class="meta">A living portfolio · started 2026</p>
+  <p class="syncstate" id="syncstate">Saving on this device</p>
+  <p><button class="setupbtn" id="setupbtn">Enter access code to sync</button></p>
+</header>
+
+<div class="weave" aria-hidden="true"></div>
+<nav id="posts" aria-label="Destinations"></nav>
+
+<section class="band">
+  <div class="wrap">
+    <h2>How to use this</h2>
+    <p class="lede">Every chapter holds a real plan: when to go, how long, what it costs, where to sleep, and what to do each day. Tap a sign to open it. Mark where you stand on each one, keep your own notes, and paste in photos that make you want to go. Everything saves on this device.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filter by status"></div>
+  </div>
+</section>
+
+<div class="weave" aria-hidden="true"></div>
+<footer class="foot">
+  Built to grow. Add chapters by editing the <code>PLACES</code> list in this file.
+</footer>
+
+<div class="view" id="view" role="dialog" aria-modal="true" aria-label="Trip chapter"></div>
+
+<script>
+/* ============================================================
+   DATA — add a chapter by copying one object and editing it.
+   ============================================================ */
+const PLACES = [
+{
+  id:'nm', name:'Northern New Mexico', tag:'High desert, adobe, thin bright air',
+  accent:'#C1663A', horizon:'mesa',
+  region:'Santa Fe · Taos · Abiquiú',
+  days:'6 days', budget:'$2,600', when:'Late Sept – mid Oct',
+  why:'This is the short, restful version of New Mexico — the northern Rio Grande only, no southern loop, about a third of the driving. You sleep in two places instead of seven. Santa Fe and Taos are 400-year-old towns built of mud and timber where the light does something to color that photographs cannot quite hold. Taos Pueblo has been continuously inhabited for a thousand years. The food is its own cuisine, not a regional variation of anything. And at 7,000 feet the air is so clear that distance stops reading correctly.',
+  itin:[
+   {d:'1',t:'Arrive, settle into Santa Fe',x:'Fly into Albuquerque, drive up the Turquoise Trail through Madrid. Take the first evening slow — you have gained 6,000 feet of elevation. Walk the Plaza at dusk.'},
+   {d:'2',t:'Canyon Road and the Plaza',x:'A half-mile of adobe houses turned into 80-odd galleries. Georgia O\'Keeffe Museum in the morning, Canyon Road all afternoon on foot. No driving at all today.'},
+   {d:'3',t:'Bandelier and Los Alamos',x:'Cliff dwellings carved into volcanic ash, with ladders you can climb into the rooms. An easy 1.4-mile loop. Los Alamos on the way back for the strangeness of it.'},
+   {d:'4',t:'Abiquiú and Ghost Ranch',x:'O\'Keeffe country. Red and yellow cliffs, the flat-topped Pedernal. Book the landscape tour in advance. This is the best photography day of the trip.'},
+   {d:'5',t:'High Road to Taos',x:'Up through Chimayó and Truchas — mountain villages, weaving shops, the little adobe sanctuary at Chimayó. Arrive Taos mid-afternoon for the Pueblo in low light.'},
+   {d:'6',t:'Enchanted Circle, then soak',x:'The 84-mile loop through Angel Fire, Eagle Nest and Red River, peak aspen gold in October. Finish at Ojo Caliente mineral springs on the way south.'}
+  ],
+  stay:[
+   {n:'Inn on the Alameda, Santa Fe',x:'Adobe, walkable to Canyon Road, quiet courtyards. ~$240/night.'},
+   {n:'Drury Plaza Hotel, Santa Fe',x:'On the Plaza, rooftop pool with mountain views. ~$220.'},
+   {n:'Hotel La Fonda de Taos',x:'On the Taos Plaza, walk to everything. ~$180.'},
+   {n:'Ojo Caliente Mineral Springs',x:'Worth one night as the closing move, not just a day stop. ~$210.'}
+  ],
+  tips:[
+   'Balloon Fiesta in Albuquerque runs Oct 2–10, 2027. Adding it costs about $600 and three days. Worth it once.',
+   'Elevation is real. Drink twice what you think you need for the first 48 hours.',
+   'The full 13-day version — Roswell, White Sands, Silver City, the hot springs at Truth or Consequences — is a separate trip. Don\'t bolt it on.',
+   '65–75°F days, 35–45°F nights in October. A real jacket, not a fleece.'
+  ],
+  links:[
+   {l:'New Mexico Tourism',u:'https://www.newmexico.org'},
+   {l:'Bandelier National Monument',u:'https://www.nps.gov/band'},
+   {l:'Taos Pueblo',u:'https://taospueblo.com'},
+   {l:'Ghost Ranch',u:'https://www.ghostranch.org'},
+   {l:'Balloon Fiesta',u:'https://www.balloonfiesta.com'}
+  ]
+},
+{
+  id:'kauai', name:'Kaua\'i', tag:'Green cliffs, warm water, nothing to prove',
+  accent:'#47786B', horizon:'cliffs',
+  region:'Hanalei · Poipu · Waimea',
+  days:'8 days', budget:'$4,800', when:'April–May or Sept–Oct',
+  why:'The oldest Hawaiian island and the least developed. No building taller than a palm tree, one road that does not quite circle the island, and a north shore of fluted green cliffs that look invented. Hawaiian culture here is lived rather than performed — the language on road signs, taro fields still farmed in Hanalei, hula that is not a dinner show. The water is 78°F and the Wailua River and Hanalei Bay are among the best flat-water paddleboarding anywhere. This is the one on the list built for rest rather than motion.',
+  itin:[
+   {d:'1',t:'Land in Līhu\'e, drive north',x:'Pick up the car, stop for poke, and get to Hanalei before dark. Do nothing else on day one.'},
+   {d:'2',t:'Hanalei Bay',x:'Two-mile crescent of sand backed by waterfall-streaked mountains. Swim, walk to the pier, eat shave ice. This is the day you remember what rest feels like.'},
+   {d:'3',t:'Paddle the Hanalei River',x:'Flat, jungle-lined, turtles underneath you. Two to three hours out and back. Afternoon at Tunnels or Ke\'e Beach.'},
+   {d:'4',t:'Nā Pali by boat',x:'The only way to see the coast without a 22-mile hike. Morning catamaran out of Hanalei or Port Allen — 4,000-foot cliffs dropping into the sea.'},
+   {d:'5',t:'Move south to Poipu',x:'Reset on the sunny side. Spouting Horn, Old Koloa Town, and the beach at Poipu where monk seals haul out.'},
+   {d:'6',t:'Waimea Canyon and Kōke\'e',x:'A 3,000-foot red gorge on a tropical island. Drive up early before the clouds close the lookouts. Cool enough for a jacket at the top.'},
+   {d:'7',t:'Wailua River and the east side',x:'Paddle to the Fern Grotto, or kayak to the Secret Falls trail. Afternoon at the farmers market in Kapa\'a.'},
+   {d:'8',t:'Slow morning, fly out',x:'Coffee, one more swim, drive twenty minutes to the airport.'}
+  ],
+  stay:[
+   {n:'Hanalei Colony Resort',x:'The last property on the north shore road. No TVs, no wifi in rooms, ocean right there. ~$400/night.'},
+   {n:'Vacation rental in Hanalei or Princeville',x:'Better value than hotels here and gives you a kitchen. ~$280–350.'},
+   {n:'Ko\'a Kea Resort, Poipu',x:'Small, calm, adult-leaning, right on the sand. ~$450.'},
+   {n:'Kaua\'i Shores, Kapa\'a',x:'The affordable, cheerful option if you want to spend money on activities instead. ~$200.'}
+  ],
+  tips:[
+   'North shore is wet November–March. April–May and September–October are the sweet spots for sun and lower rates.',
+   'Rent the car before the flight. Kaua\'i runs out of cars, and there is no realistic alternative.',
+   'Hā\'ena State Park and the Kalalau trailhead require advance reservations. Book the day they open.',
+   'Reef-safe sunscreen is law here, not a suggestion.'
+  ],
+  links:[
+   {l:'Go Hawai\'i — Kaua\'i',u:'https://www.gohawaii.com/islands/kauai'},
+   {l:'Hawai\'i State Parks, Kaua\'i',u:'https://dlnr.hawaii.gov/dsp/parks/kauai/'},
+   {l:'Kaua\'i visitor info',u:'https://www.kauai.gov'}
+  ]
+},
+{
+  id:'maine', name:'A Maine Windjammer', tag:'Three days under sail, no engine, no signal',
+  accent:'#5A7A93', horizon:'islands',
+  region:'Camden · Penobscot Bay · Acadia',
+  days:'7 days', budget:'$2,600', when:'Late June – September',
+  why:'A restored wooden schooner, twenty passengers, no engine and no itinerary. The captain reads the wind each morning and decides where you sleep that night — a different island cove every time. Lobster cooked on a beach. You help hoist a sail if you want to and read on deck if you do not. It is the most genuinely restorative thing on this list because it takes decisions away from you instead of adding them, which is not something you get much of. Add Acadia after for the mountains-meeting-ocean part.',
+  itin:[
+   {d:'1',t:'Camden',x:'Arrive, walk the harbor, climb Mount Battie for the view over Penobscot Bay. Board the schooner in the evening.'},
+   {d:'2',t:'Under sail',x:'Wherever the wind goes. Islands, seals, lighthouses. Meals cooked on a woodstove below deck.'},
+   {d:'3',t:'Island cove',x:'Anchor, row ashore, walk a spruce island nobody lives on. Lobster bake on the rocks.'},
+   {d:'4',t:'Back to Camden',x:'Sail in mid-morning. Shower, sleep in a bed, feel slightly changed.'},
+   {d:'5',t:'Drive to Bar Harbor',x:'Two hours up the coast. Stop in Blue Hill or Castine. Settle in.'},
+   {d:'6',t:'Acadia',x:'Cadillac Mountain at sunrise if you can face it, the Park Loop Road, Jordan Pond, and the carriage roads on foot. Granite, spruce and Atlantic all at once.'},
+   {d:'7',t:'Coast home',x:'Drive back down to Portland, eat one more thing, fly out.'}
+  ],
+  stay:[
+   {n:'The schooner',x:'Cabins are small and that is the point. Most 3–4 night sails run $700–1,100 all-inclusive.'},
+   {n:'16 Bay View, Camden',x:'The comfortable night on either end of the sail. ~$300.'},
+   {n:'Bar Harbor Inn',x:'On the water, walkable to town, older and gracious. ~$280.'},
+   {n:'Inns in Southwest Harbor',x:'The quiet side of the island, half the crowds. ~$200.'}
+  ],
+  tips:[
+   'The Maine Windjammer Association lists the fleet. Boats differ a lot — read the cabin descriptions before booking.',
+   'September is the best month: warm days, cold nights, no crowds, no bugs.',
+   'Bring layers and a real rain shell. Weather on the bay changes hourly.',
+   'Acadia requires a vehicle reservation for Cadillac Mountain sunrise. Book it the moment they release.'
+  ],
+  links:[
+   {l:'Maine Windjammer Association',u:'https://sailmainecoast.com'},
+   {l:'Acadia National Park',u:'https://www.nps.gov/acad'},
+   {l:'Visit Camden',u:'https://www.camdenme.org'},
+   {l:'Visit Maine',u:'https://visitmaine.com'}
+  ]
+},
+{
+  id:'sanjuans', name:'San Juan Islands', tag:'Cool green water, orcas, farm stands',
+  accent:'#8FA98C', horizon:'islands',
+  region:'Orcas · San Juan · Lopez',
+  days:'6 days', budget:'$2,400', when:'June – September',
+  why:'An archipelago in the rain shadow of the Olympics — sunnier and drier than Seattle, cool enough to sleep with the window open in August. You get there by ferry, which slows everything down before you arrive. Orcas Island has a 2,400-foot mountain you can drive up, protected water for paddling, and farm stands run on the honor system. No chains. No nightlife. Resident orca pods and humpbacks in the channels. Calm without being empty.',
+  itin:[
+   {d:'1',t:'Ferry to Orcas',x:'Fly into Seattle or Bellingham, drive to Anacortes, walk or drive onto the ferry. An hour of islands sliding past.'},
+   {d:'2',t:'Moran State Park',x:'Drive to the top of Mount Constitution — the whole archipelago, Vancouver Island and Mount Baker in one view. Lakes and waterfalls below.'},
+   {d:'3',t:'Paddle Deer Harbor',x:'Sheltered water, seals, bald eagles. Guided kayak or your own board. Afternoon at Eastsound village.'},
+   {d:'4',t:'Whale watching',x:'Boat out of Friday Harbor or Deer Harbor. Resident and transient orcas, humpbacks, minke. Bring the long lens.'},
+   {d:'5',t:'San Juan Island',x:'Ferry across. Lime Kiln Point for shore-based whale watching, the lavender farm, English Camp, Friday Harbor for dinner.'},
+   {d:'6',t:'Lopez, then home',x:'The flat, bicycle-friendly one. Farm stands, quiet beaches, then the ferry back.'}
+  ],
+  stay:[
+   {n:'Rosario Resort, Orcas',x:'A 1909 shipbuilder\'s mansion on the water. Historic, calm, a pipe organ concert in the evenings. ~$300.'},
+   {n:'Outlook Inn, Eastsound',x:'In the village, walk to everything. ~$220.'},
+   {n:'Doe Bay Resort',x:'Rustic, soaking tubs over the water, deliberately unplugged. ~$180.'},
+   {n:'Friday Harbor House',x:'Above the harbor on San Juan Island. ~$320.'}
+  ],
+  tips:[
+   'Ferry vehicle reservations open two months ahead and matter in summer. Walking on is easier if you rent a car or bike on-island.',
+   'July and August are dry and mid-70s. May and September are quieter and still good.',
+   'Orcas Island and San Juan Island are different places with the same name confusion. Orcas is the mountainous one.',
+   'No chain restaurants on the islands. Reservations for dinner in summer.'
+  ],
+  links:[
+   {l:'Visit the San Juans',u:'https://www.visitsanjuans.com'},
+   {l:'Washington State Ferries',u:'https://wsdot.wa.gov/travel/washington-state-ferries'},
+   {l:'Moran State Park',u:'https://parks.wa.gov'}
+  ]
+},
+{
+  id:'hudson', name:'Hudson Valley & the Berkshires', tag:'Enormous art in old buildings',
+  accent:'#9C7A93', horizon:'hills',
+  region:'Beacon · Hudson · North Adams',
+  days:'5 days', budget:'$2,000', when:'May–June or late Sept–Oct',
+  why:'If what you want is to think differently for a week, this is the one. Former factories and box-printing plants converted into art spaces at a scale that does not exist anywhere else — Dia Beacon is a Nabisco plant holding room-sized minimalist work, Mass MoCA occupies 26 buildings of a shuttered mill. Storm King is 500 acres of sculpture set in landscape you walk through. Between them: Shaker villages, river towns, farm restaurants, and hills that turn in October. Short drives, small towns, no wilderness required.',
+  itin:[
+   {d:'1',t:'Beacon',x:'Train up from NYC or fly into Newark and drive. Main Street, then the river. Small town, good food, low key.'},
+   {d:'2',t:'Dia Beacon',x:'Give it four hours minimum. Daylight through sawtooth skylights on 300,000 square feet of art. Nothing prepares you for the Richard Serra rooms.'},
+   {d:'3',t:'Storm King',x:'Sculpture across 500 acres of meadow and hill. Rent a bike or walk it. Then drive north to Hudson for the antiques and the restaurants.'},
+   {d:'4',t:'Across to the Berkshires',x:'Hancock Shaker Village — the round stone barn, the plainness of it. Then Mass MoCA in North Adams for the rest of the day.'},
+   {d:'5',t:'Mountains and home',x:'Mount Greylock for the view over three states, or the Clark Art Institute in Williamstown, then drive back.'}
+  ],
+  stay:[
+   {n:'The Roundhouse, Beacon',x:'Converted mill on a waterfall in the middle of town. ~$260.'},
+   {n:'The Maker, Hudson',x:'Design-forward, small, excellent bar and café. ~$350.'},
+   {n:'Tourists, North Adams',x:'A reinvented roadside motel on the river, walking bridge to a trail. ~$230.'},
+   {n:'The Porches Inn',x:'Row houses across from Mass MoCA. ~$240.'}
+  ],
+  tips:[
+   'Dia Beacon closes some weekdays. Check before you build the day around it.',
+   'October foliage doubles the room rates and the traffic. Late September gets you most of the color for less.',
+   'The whole loop is under 200 miles of driving across five days.',
+   'You can do this without a car if you base in Beacon and Hudson — both are on the Amtrak line.'
+  ],
+  links:[
+   {l:'Dia Beacon',u:'https://www.diaart.org'},
+   {l:'Storm King Art Center',u:'https://stormking.org'},
+   {l:'Mass MoCA',u:'https://massmoca.org'},
+   {l:'Hancock Shaker Village',u:'https://hancockshakervillage.org'}
+  ]
+},
+{
+  id:'cajun', name:'Cajun Louisiana', tag:'French at the gas station, cypress at dawn',
+  accent:'#9A6B4F', horizon:'swamp',
+  region:'Lafayette · Breaux Bridge · Atchafalaya',
+  days:'5 days', budget:'$1,400', when:'March–May or October',
+  why:'Not New Orleans. Two hours west is Acadiana, where people descended from Nova Scotian exiles still speak French, and the music, the food and the landscape are all things you have not encountered. Zydeco breakfast dances on Saturday mornings — actual dancing, at 8am, with no bar involved. The Atchafalaya is the largest river swamp in the country and at sunrise it is silent and enormous. This is the cheapest trip on the list and the one that will surprise you most per dollar.',
+  itin:[
+   {d:'1',t:'Into Lafayette',x:'Fly in or drive down. Vermilionville living history village in the afternoon to get your bearings on who these people are.'},
+   {d:'2',t:'Breaux Bridge',x:'Zydeco breakfast at Café Des Amis or Buck & Johnny\'s — go early. Then the crawfish and the antique shops. Afternoon at Lake Martin rookery.'},
+   {d:'3',t:'The Atchafalaya',x:'Dawn boat tour into the swamp. Cypress trees standing in black water, herons, alligators, complete quiet. The best photography morning of the trip.'},
+   {d:'4',t:'Prairie country',x:'Drive north to Eunice for the Liberty Theater Saturday radio show, and Mamou. Cajun music the way it was before anyone recorded it.'},
+   {d:'5',t:'Down to the coast',x:'Avery Island for the salt dome, the jungle gardens and the egret rookery. Then home.'}
+  ],
+  stay:[
+   {n:'Maison Madeleine, Breaux Bridge',x:'Restored Creole cottage by Lake Martin. Small and lovely. ~$220.'},
+   {n:'Bayou Teche B&B',x:'On the water in Breaux Bridge. ~$160.'},
+   {n:'Juliet Hotel, Lafayette',x:'Boutique, downtown, walkable. ~$150.'},
+   {n:'Chain hotels, Lafayette',x:'Perfectly fine and cheap here. ~$110.'}
+  ],
+  tips:[
+   'Go in spring or October. Summer is brutal humidity and the swamp tours are miserable.',
+   'Crawfish season peaks March through May. This is not a small detail.',
+   'The zydeco dances are Saturday mornings. Build the trip around a Saturday.',
+   'Rent a car. Nothing here is walkable between towns.'
+  ],
+  links:[
+   {l:'Lafayette Travel',u:'https://www.lafayettetravel.com'},
+   {l:'Explore Louisiana',u:'https://www.explorelouisiana.com'},
+   {l:'Jean Lafitte — Acadian Cultural Center',u:'https://www.nps.gov/jela'}
+  ]
+},
+{
+  id:'lowcountry', name:'The Gullah Geechee Lowcountry', tag:'Marsh gold, tidal creeks, a language you have never heard',
+  accent:'#C2973F', horizon:'marsh',
+  region:'Charleston · Beaufort · the Sea Islands',
+  days:'5 days', budget:'$1,800', when:'March–May or October–November',
+  why:'The Sea Islands off South Carolina and Georgia hold a culture most Americans do not know exists — Gullah Geechee, descended from West Africans brought to the rice plantations, with its own creole language, its own foodways, its own sweetgrass basketry traced directly to Sierra Leone. The land is flat, tidal, and gold in autumn: spartina grass, live oaks under Spanish moss, creeks that fill and empty twice a day. Warm, easy walking, superb flat-water paddling, and history told from a perspective you will not have encountered.',
+  itin:[
+   {d:'1',t:'Charleston',x:'Arrive and walk. The old city on foot, the market for sweetgrass baskets made in front of you, dinner somewhere serious.'},
+   {d:'2',t:'The full story',x:'The International African American Museum, built on the wharf where roughly 40% of enslaved Africans entered this country. Then the Charleston Museum. A heavy, necessary day.'},
+   {d:'3',t:'Down to Beaufort',x:'Ninety minutes south into the real Lowcountry. A small waterfront town of antebellum houses under oaks. Slower, warmer, quieter than Charleston.'},
+   {d:'4',t:'St. Helena Island',x:'Penn Center — one of the first schools for freed slaves, still a Gullah cultural institution. Then the tidal creeks: paddle out at high tide through the marsh.'},
+   {d:'5',t:'Hunting Island',x:'Wild Atlantic beach with a maritime forest and a lighthouse. Boneyard beach at low tide. Then back to Charleston to fly out.'}
+  ],
+  stay:[
+   {n:'The Vendue, Charleston',x:'Art hotel in the French Quarter, rooftop bar over the harbor. ~$280.'},
+   {n:'Zero George, Charleston',x:'Five restored houses around a courtyard. Quiet and exceptional. ~$400.'},
+   {n:'City Loft Hotel, Beaufort',x:'Small, modern, right downtown. ~$180.'},
+   {n:'Beaufort Inn',x:'Cottages and gardens, walkable to the waterfront. ~$220.'}
+  ],
+  tips:[
+   'April and October are perfect. June through August is heat, humidity and bugs.',
+   'The Gullah Geechee Cultural Heritage Corridor runs from North Carolina to Florida — the Beaufort section is the densest.',
+   'Book a Gullah-led tour rather than a general one. It is a completely different trip.',
+   'Tides govern the paddling. Check the chart and go out on a rising tide.'
+  ],
+  links:[
+   {l:'Explore Charleston',u:'https://www.explorecharleston.com'},
+   {l:'Gullah Geechee Heritage Corridor',u:'https://www.nps.gov/guge'},
+   {l:'Reconstruction Era National Historical Park',u:'https://www.nps.gov/reer'},
+   {l:'Visit Beaufort SC',u:'https://www.beaufortsc.org'}
+  ]
+},
+{
+  id:'bigbend', name:'Big Bend & Marfa', tag:'The darkest sky in the country',
+  accent:'#9E4A42', horizon:'mesa',
+  region:'West Texas · Rio Grande',
+  days:'6 days', budget:'$2,800', when:'March–April or October–November',
+  why:'The emptiest corner of the lower 48. Big Bend is the size of Rhode Island with a few hundred people in it, the Rio Grande running through 1,500-foot limestone canyons, and a certified dark sky where you can see your own shadow by starlight. Then Marfa — a former railroad town in the middle of nothing that became a minimalist art destination, where Donald Judd installed a hundred aluminum boxes in old artillery sheds. The combination of absolute emptiness and deliberate art is genuinely disorienting in a good way.',
+  itin:[
+   {d:'1',t:'Fly to Midland, drive west',x:'Three hours through nothing to Marfa or Alpine. The drive is part of it.'},
+   {d:'2',t:'Marfa',x:'The Chinati Foundation — Judd\'s concrete and aluminum works in a decommissioned army fort. Book the full tour. Prada Marfa on the way out of town.'},
+   {d:'3',t:'Into Big Bend',x:'Drive south, enter the park. Chisos Basin for the afternoon, Window View trail at sunset.'},
+   {d:'4',t:'Santa Elena Canyon',x:'The Ross Maxwell Scenic Drive, then the canyon — walls 1,500 feet on both sides, the Rio Grande between them. Mexico is the far bank.'},
+   {d:'5',t:'Hot springs and stars',x:'Boquillas Canyon and the riverside hot spring at 105°F. Stay out after dark — this is the darkest measured sky in the National Park system.'},
+   {d:'6',t:'Out through Fort Davis',x:'The McDonald Observatory on the way back, then Midland.'}
+  ],
+  stay:[
+   {n:'Hotel Saint George, Marfa',x:'Modern, spare, excellent bookstore attached. ~$280.'},
+   {n:'El Cosmico, Marfa',x:'Trailers, yurts and tents in a field. Outdoor tubs. Not for everyone. ~$180.'},
+   {n:'Chisos Mountains Lodge',x:'The only lodging inside the park. Books out a year ahead. ~$180.'},
+   {n:'Gage Hotel, Marathon',x:'1927 railroad hotel, the comfortable base outside the park. ~$250.'}
+  ],
+  tips:[
+   'Skip this if you do Northern New Mexico first. Same family of landscape — do one, then the other years later.',
+   'Summer is 100°F+. Winter nights drop below freezing. March–April and October–November only.',
+   'No cell service in most of the park. Download maps, tell someone your plan.',
+   'Fuel is scarce and expensive. Fill up in Alpine or Marathon before you go in.'
+  ],
+  links:[
+   {l:'Big Bend National Park',u:'https://www.nps.gov/bibe'},
+   {l:'The Chinati Foundation',u:'https://chinati.org'},
+   {l:'Visit Marfa',u:'https://visitmarfa.com'},
+   {l:'McDonald Observatory',u:'https://mcdonaldobservatory.org'}
+  ]
+},
+{
+  id:'olympic', name:'Olympic Peninsula', tag:'Rainforest, sea stacks, alpine ridge — one hour apart',
+  accent:'#5F7256', horizon:'forest',
+  region:'Forks · Lake Quinault · Port Angeles',
+  days:'6 days', budget:'$2,200', when:'July – September',
+  why:'One park holding three completely separate worlds. The Hoh is a temperate rainforest — twelve feet of rain a year, moss hanging in curtains, trees three hundred feet tall. An hour west is a wild Pacific coast of sea stacks and driftwood where the tide pools are full. An hour east is Hurricane Ridge with alpine meadows and glaciers in view. Cool, damp, green and profoundly quiet. Tribal-run coastal towns, no crowds compared to the big western parks, and cheap.',
+  itin:[
+   {d:'1',t:'Seattle to Lake Quinault',x:'Ferry across the sound, then drive. Stay at the 1926 lodge on the lake. Rainforest starts at the door.'},
+   {d:'2',t:'Quinault Valley',x:'The world\'s largest Sitka spruce, waterfalls, and a loop drive around the lake. Easy walking, enormous trees.'},
+   {d:'3',t:'North to the Hoh',x:'The Hall of Mosses trail. Go early or late — the light through the canopy is the whole point. Then out to Ruby Beach for sunset.'},
+   {d:'4',t:'The coast',x:'Rialto Beach and Hole-in-the-Wall at low tide, or Second Beach at La Push. Sea stacks, eagles, driftwood the size of buildings.'},
+   {d:'5',t:'Lake Crescent and Hurricane Ridge',x:'Glacial lake so clear it looks fake, Marymere Falls, then up to the ridge for meadows and the view across to Canada.'},
+   {d:'6',t:'Port Townsend, then out',x:'A Victorian seaport with a good bookstore and better coffee. Ferry back toward Seattle.'}
+  ],
+  stay:[
+   {n:'Lake Quinault Lodge',x:'1926, fireplace, lawn down to the lake. No TVs. ~$250.'},
+   {n:'Lake Crescent Lodge',x:'On the water inside the park. Books out early. ~$280.'},
+   {n:'Kalaloch Lodge',x:'Bluff cabins directly above the Pacific. ~$300.'},
+   {n:'Forks or Port Angeles motels',x:'The budget spine of the trip. ~$130.'}
+  ],
+  tips:[
+   'July through September is the dry window. Outside that it rains most days.',
+   'Distances are deceiving — the park has no road through the middle. Everything is around the edge.',
+   'Check a tide chart before any beach walk. Rialto and Second Beach require low tide.',
+   'No cell service across most of the west side.'
+  ],
+  links:[
+   {l:'Olympic National Park',u:'https://www.nps.gov/olym'},
+   {l:'Olympic Peninsula tourism',u:'https://olympicpeninsula.org'},
+   {l:'Washington State Ferries',u:'https://wsdot.wa.gov/travel/washington-state-ferries'}
+  ]
+},
+{
+  id:'bigisland', name:'Hawai\'i, the Big Island', tag:'Lava, snow and rainforest on one island',
+  accent:'#7E4A45', horizon:'volcano',
+  region:'Volcano · Hilo · Kona',
+  days:'8 days', budget:'$5,500', when:'April–May or Sept–Oct',
+  why:'The most geographically extreme place in the country. Eleven of the world\'s thirteen climate zones on a single island: active lava fields, black sand beaches, a 13,800-foot summit that gets snow, and rainforest that gets 130 inches of rain. Kīlauea has been erupting on and off for decades and you can stand at the caldera rim. If Kaua\'i is the restful Hawai\'i, this is the astonishing one. Do this if the point is to see something you cannot quite believe.',
+  itin:[
+   {d:'1',t:'Land in Kona',x:'West side, dry and sunny. Get to the water, eat poke, sleep off the flight.'},
+   {d:'2',t:'Kona coast',x:'Snorkel at Kealakekua or Two Step — the clearest water on the island. Coffee farm in the hills in the afternoon.'},
+   {d:'3',t:'Manta rays',x:'Night snorkel with manta rays off the Kona coast. Fifteen-foot wingspans passing under you. Genuinely once in a lifetime.'},
+   {d:'4',t:'Cross to Volcano',x:'Drive south past Punalu\'u black sand beach and the southernmost point in the United States. Arrive Volcano village by evening.'},
+   {d:'5',t:'Hawai\'i Volcanoes National Park',x:'Kīlauea caldera, steam vents, the Thurston lava tube, the Chain of Craters Road down to the sea. Come back after dark for the glow.'},
+   {d:'6',t:'Hilo side',x:'Rainbow Falls, the botanical garden on the Hāmākua coast, and the farmers market. Wet, green, old Hawai\'i.'},
+   {d:'7',t:'Waipi\'o and Mauna Kea',x:'The valley overlook in the morning, then up to the Mauna Kea visitor station at 9,200 feet for sunset and stargazing.'},
+   {d:'8',t:'Back to Kona',x:'Last swim, then the airport.'}
+  ],
+  stay:[
+   {n:'Volcano Village lodges',x:'Cottages in the rainforest at the park entrance. Cool and misty. ~$220.'},
+   {n:'Holualoa Inn, Kona hills',x:'Above the coast in a coffee grove. Quiet, adult, wonderful. ~$400.'},
+   {n:'Mauna Lani or Waikoloa, Kohala',x:'Resort coast if you want a few soft days. ~$500+.'},
+   {n:'Hilo hotels',x:'Half the price of the west side and closer to the park. ~$180.'}
+  ],
+  tips:[
+   'Base in two places minimum — Kona and Volcano or Hilo. The island is too big for one.',
+   'Volcanic activity changes constantly. Check park conditions before you build days around it.',
+   'Mauna Kea summit requires 4WD and is 30°F at night. The visitor station at 9,200 feet is enough for stargazing.',
+   'Longest flight on this list from Indianapolis — plan on a full travel day each way.'
+  ],
+  links:[
+   {l:'Go Hawai\'i — Big Island',u:'https://www.gohawaii.com/islands/hawaii-big-island'},
+   {l:'Hawai\'i Volcanoes National Park',u:'https://www.nps.gov/havo'}
+  ]
+},
+{
+  id:'camino', scope:'world', name:'The Camino de Santiago', tag:'Two weeks on foot across northern Spain',
+  accent:'#6A7BA2', horizon:'meseta',
+  region:'León to Santiago · Camino Francés',
+  days:'17 days', budget:'$3,200', when:'May–June or September',
+  why:'The full Camino Francés is 500 miles and 34 days, and waiting until you have five weeks free is how this stays a someday. So walk the last third: León to Santiago, 190 miles, fourteen days of walking. It is the real route, not an abbreviated version — the Cruz de Ferro where you leave a stone carried from home, the climb over O Cebreiro into Galicia where the language and the weather both change, and the long green descent into Santiago. You arrive in the cathedral square having actually earned it. And you will be having real conversations in the villages rather than pointing at menus, which is a different trip than most pilgrims get.',
+  itin:[
+   {d:'1',t:'Fly to Madrid, train to León',x:'Arrive, get the credencial stamped at the cathedral, eat, sleep. León is a beautiful city — give it the afternoon.'},
+   {d:'2',t:'León → Hospital de Órbigo',x:'32 km. Out through the suburbs into open country. A 13th-century bridge at the end where medieval jousts were held.'},
+   {d:'3',t:'→ Astorga',x:'16 km. Short day. A Gaudí palace, Roman walls, and the best chocolate on the route.'},
+   {d:'4',t:'→ Rabanal del Camino',x:'20 km. The land starts tilting up into the Montes de León. Gregorian chant at the monastery in the evening.'},
+   {d:'5',t:'→ Molinaseca',x:'25 km. Over the Cruz de Ferro at 1,500 m. You leave the stone you carried from Indiana. Then a long knee-testing descent.'},
+   {d:'6',t:'→ Ponferrada',x:'8 km. A deliberately easy day. Templar castle, good food, let the legs recover.'},
+   {d:'7',t:'→ Villafranca del Bierzo',x:'24 km. Through vineyards. A church with a door that granted absolution to pilgrims too sick to continue.'},
+   {d:'8',t:'→ O Cebreiro',x:'28 km, 700 m of climb. The hardest day. Round stone huts with thatched roofs at the top, and Galicia spread out below.'},
+   {d:'9',t:'→ Triacastela',x:'21 km. Downhill through chestnut woods. Everything is green now and it smells like rain.'},
+   {d:'10',t:'→ Sarria',x:'18 km. Where the crowds join — this is the 100 km mark. The route gets social from here.'},
+   {d:'11',t:'→ Portomarín',x:'22 km. Stone walls, oak woods, and a village that was moved uphill piece by piece when they dammed the river.'},
+   {d:'12',t:'→ Palas de Rei',x:'25 km. Rolling farm country, horreos on stilts, cows on the path.'},
+   {d:'13',t:'→ Arzúa',x:'29 km. Through Melide — stop for pulpo a feira at Ezequiel, which is the single best meal on the Camino.'},
+   {d:'14',t:'→ O Pedrouzo',x:'19 km. Eucalyptus forest. You can feel the end coming and most people slow down on purpose.'},
+   {d:'15',t:'→ Santiago de Compostela',x:'20 km. Into the city, to the square, to the Pilgrim Mass. Collect the Compostela. Sit down and let it land.'},
+   {d:'16',t:'Santiago',x:'A full day to do nothing. The cathedral properly, the market, the old town. Or take the bus out to Finisterre and the sea.'},
+   {d:'17',t:'Fly home',x:'Santiago has direct flights to Madrid and several European hubs.'}
+  ],
+  stay:[
+   {n:'Albergues',x:'Pilgrim hostels, €10–15, bunk rooms, first-come in the traditional style. The social heart of the Camino.'},
+   {n:'Pensións and casas rurales',x:'€40–70 for your own room and bath. Bookable a day or two ahead. What I would do most nights.'},
+   {n:'Paradores',x:'State-run historic hotels — León and Santiago both have spectacular ones. €150–220. Worth it at the start and the finish.'},
+   {n:'Booking approach',x:'Mix them. Albergues for the company, a private room every third night so you actually sleep.'}
+  ],
+  tips:[
+   'Training is the part people skip. You need back-to-back days of 12–15 miles carrying 15 pounds, not single long walks. Six months of building.',
+   'Pack 10% of body weight, hard ceiling. Everything hurts more than expected by day nine.',
+   'Boots broken in over 100+ miles before you go. Blisters end more Caminos than anything else.',
+   'You need the credencial stamped twice daily over the last 100 km to receive the Compostela.',
+   'Luggage transfer services will move your pack between stages for about €6/day. No shame in it.',
+   'September is ideal: warm, harvest, thinner crowds than summer. May and June are the other window.'
+  ],
+  links:[
+   {l:'American Pilgrims on the Camino',u:'https://americanpilgrims.org'},
+   {l:'Pilgrim\'s Office, Santiago',u:'https://oficinadelperegrino.com'},
+   {l:'Gronze — stage by stage',u:'https://www.gronze.com'},
+   {l:'Camino Forum',u:'https://www.caminodesantiago.me'}
+  ]
+},
+{
+  id:'greece', scope:'world', name:'The Greek Islands', tag:'Seven nights in the Aegean with Isa and Camila',
+  accent:'#5AA7AC', horizon:'aegean',
+  region:'Athens · Cyclades · Dodecanese',
+  days:'11 days', budget:'$3,400 each', when:'September',
+  why:'This one is already half-decided — a 7-night Celestyal sailing in September, with Isa and Camila. September is the right call: the sea is at its warmest after a summer of heating, the crowds thin after the August peak, and the light goes long and gold. The cruise solves the hard part of Greek island travel, which is that ferries between islands eat entire days. You wake up somewhere new each morning without repacking. Bookend it with Athens on both sides so the trip has land under it — the Acropolis is not a port excursion.',
+  itin:[
+   {d:'1',t:'Fly to Athens',x:'Overnight from the US, arrive afternoon. Hotel in Plaka or Monastiraki. Rooftop dinner with the Acropolis lit up.'},
+   {d:'2',t:'Athens',x:'Acropolis at opening before the heat, then the Acropolis Museum. Afternoon in the Plaka and the Central Market. Slow evening.'},
+   {d:'3',t:'Board',x:'Transfer to the port, board Celestyal, sail in the evening. Dinner at sea.'},
+   {d:'4',t:'Aegean ports',x:'The classic Celestyal week runs Mykonos, Kuşadası for Ephesus, Patmos, Crete, Santorini and Milos in some order. Confirm your exact sailing.'},
+   {d:'5',t:'Santorini',x:'The one everyone comes for. Cable car up to Fira, bus to Oia, and the caldera at sunset. Book any excursion early — tender days get congested.'},
+   {d:'6',t:'Ephesus from Kuşadası',x:'One of the best-preserved classical cities anywhere. The library facade, the theater, marble streets. Go with a guide.'},
+   {d:'7',t:'Mykonos',x:'Windmills, Little Venice, the whitewashed maze. The girls will love it. Go ashore early and stay through dinner.'},
+   {d:'8',t:'Crete or Milos',x:'Crete for Knossos and Minoan history; Milos for Sarakiniko, which looks like a moonscape dropped into turquoise water.'},
+   {d:'9',t:'Back to Athens',x:'Disembark morning. Check back into the city.'},
+   {d:'10',t:'Cape Sounion',x:'Half-day out to the Temple of Poseidon on the cliff. Sunset there is the right last image of Greece.'},
+   {d:'11',t:'Fly home',x:'Morning departure from Athens.'}
+  ],
+  stay:[
+   {n:'Celestyal, 7 nights',x:'Balcony cabin for three is tight — consider two cabins or a triple with a window. €900–1,500 per person depending on category.'},
+   {n:'Electra Metropolis, Athens',x:'Rooftop pool looking at the Acropolis. ~€220/night.'},
+   {n:'Hotel Grande Bretagne',x:'The grand one on Syntagma if you want to spend it somewhere. ~€400.'},
+   {n:'AthensWas or Herodion',x:'Right under the Acropolis, walkable to everything. ~€180.'}
+  ],
+  tips:[
+   'Book the cruise 9–12 months out for September — it is the most requested month and the good cabins go.',
+   'Check what Celestyal includes. Their fares often bundle several shore excursions and drinks, which changes the real comparison against other lines.',
+   'Two nights in Athens before and two after. Do not try to see the Acropolis on a cruise turnaround day.',
+   'Passports need 6 months validity beyond the return date. Check all three well ahead.',
+   'Santorini is a tender port. If mobility or timing matters, book the ship excursion rather than going independently.',
+   'September water is around 77°F — warmer than June. Pack for swimming.'
+  ],
+  links:[
+   {l:'Celestyal Cruises',u:'https://www.celestyal.com'},
+   {l:'Visit Greece',u:'https://www.visitgreece.gr'},
+   {l:'Acropolis tickets',u:'https://hhticket.gr'},
+   {l:'Ephesus',u:'https://whc.unesco.org/en/list/1018/'}
+  ]
+}
+];
+
+
+/* ---------- colour helpers: readable text on any accent ---------- */
+function rgb_(h){return [1,3,5].map(i=>parseInt(h.substr(i,2),16));}
+function lum_(h){const c=rgb_(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
+  return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function ratio_(a,b){const [x,y]=[lum_(a),lum_(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05);}
+function hex_(r,g,b){return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v)))
+  .toString(16).padStart(2,'0')).join('');}
+/* cream or ink, whichever reads better on this sign */
+function tint_(bg,amt){const a=rgb_(bg),b=rgb_('#FAF9F6');
+  return hex_(a[0]*amt+b[0]*(1-amt), a[1]*amt+b[1]*(1-amt), a[2]*amt+b[2]*(1-amt));}
+/* a darker cousin of the accent, for text on the sand background */
+function inkAccent(bg){
+  let [r,g,b]=rgb_(bg), out=bg, n=0;
+  while(ratio_(out,'#FAF9F6') < 4.5 && n++ < 14){ r*=.88; g*=.88; b*=.88; out=hex_(r,g,b); }
+  return out;
+}
+
+/* ---------- little drawn marks ---------- */
+const GLYPH={
+ 'Dreaming':'<path d="M4 13.5a3 3 0 0 1 .6-5.9A4.2 4.2 0 0 1 12.6 6 3.3 3.3 0 0 1 16 13.5Z"/>',
+ 'Shortlisted':'<path d="M9 2.6 11 7l4.8.5-3.6 3.2 1 4.7L9 13l-4.2 2.4 1-4.7L2.2 7.5 7 7Z"/>',
+ 'Booked':'<path d="M9 2.3 3.4 8.6c-1 1.2-.3 3 1.2 3.2l2.5.4.4 2.5c.2 1.5 2 2.2 3.2 1.2L17 10"/><path d="M9 2.3 17 10"/>',
+ 'Been there':'<path d="M2.6 9.4 6.9 13.6 15.4 4.2"/>'
+};
+function glyph(status){
+  const fill = status==='Shortlisted'||status==='Booked' ? 'currentColor' : 'none';
+  return '<svg viewBox="0 0 18 18" fill="'+fill+'" stroke="currentColor" stroke-width="1.5" '+
+         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+GLYPH[status]+'</svg>';
+}
+const GICON={
+ us:'<svg class="gi" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.4"/><path d="M13 7 11 11.2 6.8 13.2 8.8 9Z"/></svg>',
+ world:'<svg class="gi" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.4q2.4-2 4.8 0t4.8 0 4.4-.6"/><path d="M10 13.6V4.2l5 5.2-5 1.6"/><path d="M6.6 13.2 10 6"/></svg>'
+};
+
+const STATUSES=['Dreaming','Shortlisted','Booked','Been there'];
+
+/* ---------- storage + sync ---------- */
+const SYNC_URL='https://script.google.com/macros/s/AKfycbwiIu1jcKr5fTzBK4ptzdYd0Jk44K_B2QjPt3qQwFpZgVQyPTLW8TwXvw8DdtHnpLl_8A/exec';
+const KEY='wtn.v1', CFGKEY='wtn.cfg';
+let DB={}, CFG={url:SYNC_URL,code:''};
+try{ DB=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ DB={}; }
+try{ CFG=Object.assign(CFG,JSON.parse(localStorage.getItem(CFGKEY)||'{}')); }catch(e){}
+if(!CFG.url) CFG.url=SYNC_URL;
+
+function saveLocal(){
+  try{ localStorage.setItem(KEY,JSON.stringify(DB)); return true; }catch(e){ return false; }
+}
+function saveCfg(){
+  try{ localStorage.setItem(CFGKEY,JSON.stringify(CFG)); }catch(e){}
+}
+function rec(id){
+  if(!DB[id]) DB[id]={status:'Dreaming',notes:'',imgs:[],updated:0};
+  if(DB[id].updated===undefined) DB[id].updated=0;
+  return DB[id];
+}
+function touch(id){ rec(id).updated=Date.now(); }
+
+/* save() keeps the old name so every caller still works */
+function save(){ const ok=saveLocal(); queuePush(); return ok; }
+
+const syncEl=document.getElementById('syncstate');
+function syncMsg(t,tone){
+  if(!syncEl) return;
+  syncEl.textContent=t;
+  syncEl.className='syncstate'+(tone?' '+tone:'');
+}
+
+function linked(){ return !!(CFG.url && CFG.code); }
+
+async function call(action,payload){
+  const res=await fetch(CFG.url,{
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({action,code:CFG.code,data:payload||{}})
+  });
+  const j=await res.json();
+  if(!j.ok) throw new Error(j.error||'Sync refused the request.');
+  return j.data;
+}
+
+function merge(remote){
+  Object.keys(remote).forEach(id=>{
+    const r=remote[id], mine=DB[id];
+    if(!mine || (r.updated||0) > (mine.updated||0)) DB[id]=r;
+  });
+  saveLocal();
+}
+
+async function pull(quiet){
+  if(!linked()) return;
+  if(!quiet) syncMsg('Checking for changes…');
+  try{
+    merge(await call('pull'));
+    renderPost();
+    syncMsg('Up to date','good');
+  }catch(e){ syncMsg('Offline — saved on this device','warn'); }
+}
+
+let pushTimer;
+function queuePush(){
+  if(!linked()) return;
+  clearTimeout(pushTimer);
+  syncMsg('Saving…');
+  pushTimer=setTimeout(async()=>{
+    try{
+      merge(await call('push',DB));
+      syncMsg('Synced','good');
+    }catch(e){ syncMsg('Offline — saved on this device','warn'); }
+  },1200);
+}
+
+/* ---------- setup ---------- */
+function setup(){
+  const code=prompt('Enter your access code (LIL, ISA or CAM):',CFG.code||'');
+  if(code===null) return;
+  CFG.code=code.trim().toUpperCase();
+  saveCfg();
+  if(linked()){ syncMsg('Connecting…'); pull(); }
+  else syncMsg('Not syncing yet','warn');
+}
+function changeUrl(){
+  const url=prompt('Apps Script web app URL (ends in /exec):',CFG.url||'');
+  if(url===null) return;
+  CFG.url=url.trim(); saveCfg(); pull();
+}
+
+/* ---------- horizon art ---------- */
+function horizon(kind,c){
+  const dim=(o)=>`rgba(237,230,214,${o})`;
+  const shapes={
+    mesa:`<path d="M0 96 L0 70 L70 70 L88 52 L200 52 L214 70 L300 70 L300 96Z" fill="${c}" opacity=".9"/>
+          <path d="M300 96 L300 62 L360 62 L374 44 L470 44 L484 62 L600 62 L600 96Z" fill="${c}" opacity=".55"/>
+          <circle cx="520" cy="30" r="13" fill="${c}" opacity=".8"/>
+          <path d="M0 96 L0 84 L140 84 L170 76 L340 76 L380 84 L600 84 L600 96Z" fill="${c}"/>`,
+    cliffs:`<path d="M0 96 L0 44 L34 18 L64 46 L96 14 L126 48 L160 22 L192 50 L226 20 L258 52 L292 26 L320 96Z" fill="${c}" opacity=".85"/>
+            <path d="M280 96 L310 40 L340 66 L372 30 L404 62 L438 34 L470 64 L504 38 L540 70 L600 96Z" fill="${c}" opacity=".5"/>
+            <path d="M0 96 L0 86 Q150 78 300 86 T600 86 L600 96Z" fill="${c}"/>`,
+    islands:`<path d="M0 96 L0 82 Q60 60 130 82 Q150 88 170 82 L200 96Z" fill="${c}" opacity=".85"/>
+             <path d="M230 96 Q280 54 340 82 Q360 90 384 82 L410 96Z" fill="${c}" opacity=".6"/>
+             <path d="M430 96 Q490 66 546 84 Q570 92 600 86 L600 96Z" fill="${c}" opacity=".45"/>
+             <path d="M0 96 L0 90 Q300 84 600 90 L600 96Z" fill="${c}"/>
+             <path d="M296 88 L296 30 L300 30 L300 88Z" fill="${c}"/>
+             <path d="M300 34 Q340 44 300 60Z" fill="${c}" opacity=".8"/>`,
+    hills:`<path d="M0 96 L0 66 Q90 30 180 62 Q260 88 330 58 Q420 22 500 60 Q560 86 600 62 L600 96Z" fill="${c}" opacity=".5"/>
+           <path d="M0 96 L0 80 Q110 54 220 78 Q320 98 420 76 Q520 56 600 78 L600 96Z" fill="${c}" opacity=".85"/>
+           <rect x="250" y="40" width="34" height="34" fill="${c}"/>
+           <rect x="300" y="52" width="20" height="22" fill="${c}" opacity=".7"/>`,
+    swamp:`<path d="M0 96 L0 88 L600 88 L600 96Z" fill="${c}"/>
+           ${[40,110,190,275,350,430,510,570].map((x,i)=>`
+             <path d="M${x} 88 L${x-4} 40 Q${x} 26 ${x+4} 40 L${x} 88Z" fill="${c}" opacity="${.5+(i%3)*.16}"/>
+             <path d="M${x-16} 46 Q${x} 34 ${x+16} 46 Q${x} 40 ${x-16} 46Z" fill="${c}" opacity="${.4+(i%3)*.14}"/>`).join('')}
+           <path d="M0 96 L0 90 Q300 94 600 90 L600 96Z" fill="${c}" opacity=".55"/>`,
+    marsh:`<path d="M0 96 L0 74 Q150 64 300 74 T600 74 L600 96Z" fill="${c}" opacity=".35"/>
+           ${Array.from({length:46},(_,i)=>{const x=i*13+4,h=16+((i*37)%22);return `<path d="M${x} 92 L${x+1} ${92-h}" stroke="${c}" stroke-width="1.6" opacity=".8"/>`}).join('')}
+           <path d="M0 96 L0 90 L600 90 L600 96Z" fill="${c}"/>
+           <path d="M60 62 Q80 40 100 62 Q120 44 140 62Z" fill="${c}" opacity=".6"/>`,
+    forest:`${Array.from({length:26},(_,i)=>{const x=i*24+6,h=30+((i*53)%44);
+             return `<path d="M${x} 92 L${x+9} ${92-h} L${x+18} 92Z" fill="${c}" opacity="${.35+((i%4)*.16)}"/>`}).join('')}
+            <path d="M0 96 L0 90 L600 90 L600 96Z" fill="${c}"/>`,
+    meseta:`<path d="M0 96 L0 72 Q120 62 260 70 Q420 78 600 66 L600 96Z" fill="${c}" opacity=".4"/>
+            <path d="M0 96 L0 82 Q160 74 320 82 Q470 89 600 80 L600 96Z" fill="${c}" opacity=".8"/>
+            ${Array.from({length:40},(_,i)=>{const x=i*15+8,h=7+((i*29)%9);
+              return `<path d="M${x} 92 L${x+1} ${92-h}" stroke="${c}" stroke-width="1.3" opacity=".7"/>`}).join('')}
+            <path d="M436 84 L436 34 L452 34 L452 84Z" fill="${c}"/>
+            <path d="M430 34 L444 16 L458 34Z" fill="${c}"/>
+            <path d="M441 12 L441 22 M436 16 L446 16" stroke="${c}" stroke-width="2"/>
+            <path d="M0 96 L0 90 L600 90 L600 96Z" fill="${c}"/>`,
+    aegean:`<path d="M0 96 L0 78 L600 78 L600 96Z" fill="${c}" opacity=".35"/>
+            ${[30,58,88,120,150,184,214,248,282,316,352,388,420,456,492,524,558].map((x,i)=>{
+              const h=12+((i*23)%16), y=76-h;
+              return `<rect x="${x}" y="${y}" width="${16+((i*11)%8)}" height="${h}" fill="${c}" opacity="${.45+((i%4)*.14)}"/>`}).join('')}
+            <path d="M268 62 Q284 44 300 62Z" fill="${c}"/>
+            <rect x="282" y="30" width="3" height="14" fill="${c}"/>
+            <path d="M276 36 L292 36" stroke="${c}" stroke-width="2.5"/>
+            <path d="M0 96 L0 84 Q150 88 300 84 T600 84 L600 96Z" fill="${c}" opacity=".75"/>`,
+    volcano:`<path d="M0 96 L0 84 L170 84 L260 24 L300 24 L390 84 L600 84 L600 96Z" fill="${c}" opacity=".85"/>
+             <path d="M258 26 Q280 12 302 26 Q280 34 258 26Z" fill="${c}"/>
+             <path d="M266 20 Q272 4 278 18 Q284 2 290 20Z" fill="${c}" opacity=".7"/>
+             <path d="M0 96 L0 89 Q300 82 600 89 L600 96Z" fill="${c}"/>`
+  };
+  return `<svg class="horizon" viewBox="0 0 600 96" preserveAspectRatio="none" aria-hidden="true">${shapes[kind]||shapes.hills}</svg>`;
+}
+
+/* ---------- signpost ---------- */
+const postsEl=document.getElementById('posts');
+let filter='All';
+
+const GROUPS=[
+  {scope:'us',label:'Around this country'},
+  {scope:'world',label:'Worth the passport'}
+];
+
+function signFor(p){
+  const r=rec(p.id);
+  const b=document.createElement('button');
+  b.className='sign';
+  b.style.setProperty('--sc',p.accent);
+  b.style.setProperty('--tint',tint_(p.accent,.30));
+  b.style.setProperty('--sd',inkAccent(p.accent));
+  b.innerHTML=`<i class="nail a"></i><i class="nail b"></i>
+    <span class="nm">${p.name}</span><span class="tg">${p.tag}</span>
+    <span class="st" title="${r.status}">${glyph(r.status)}</span>`;
+  b.addEventListener('click',()=>open(p.id));
+  return b;
+}
+
+function renderPost(){
+  postsEl.innerHTML='';
+  const visible=PLACES.filter(p=>filter==='All'||rec(p.id).status===filter);
+  if(!visible.length){
+    postsEl.innerHTML=`<div class="postgroup"><div class="emptystate">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 17.5a4 4 0 0 1 .8-7.9A5.6 5.6 0 0 1 15.5 7.6 4.4 4.4 0 0 1 20 17.5Z"/>
+        <path d="M8 21.2q1.6-1.6 3.2 0t3.2 0" opacity=".6"/></svg>
+      <p>Nothing is ${filter.toLowerCase()} yet. Open a sign and say where you stand.</p></div></div>`;
+    return;
+  }
+  const shown=GROUPS.filter(g=>visible.some(p=>(p.scope||'us')===g.scope));
+  shown.forEach((g,gi)=>{
+    const wrap=document.createElement('div');
+    wrap.className='postgroup';
+    const h=document.createElement('p');
+    h.className='grouphead';h.innerHTML=GICON[g.scope]+'<span>'+g.label+'</span>';
+    wrap.appendChild(h);
+    const nav=document.createElement('div');
+    nav.className='post'+(gi===shown.length-1?' last':'');
+    visible.filter(p=>(p.scope||'us')===g.scope).forEach(p=>nav.appendChild(signFor(p)));
+    wrap.appendChild(nav);
+    postsEl.appendChild(wrap);
+  });
+}
+
+const filtersEl=document.getElementById('filters');
+['All',...STATUSES].forEach(s=>{
+  const b=document.createElement('button');
+  b.className='chip';b.textContent=s;b.setAttribute('aria-pressed',s===filter);
+  b.addEventListener('click',()=>{
+    filter=s;
+    [...filtersEl.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===s));
+    renderPost();
+  });
+  filtersEl.appendChild(b);
+});
+
+/* ---------- chapter view ---------- */
+const viewEl=document.getElementById('view');
+
+function open(id){
+  const p=PLACES.find(x=>x.id===id),r=rec(id);
+  viewEl.style.setProperty('--accent',inkAccent(p.accent));
+  viewEl.style.setProperty('--fill',p.accent);
+  viewEl.innerHTML=`
+  <div class="viewbar"><div class="in">
+    <button class="back" id="back">&larr; All places</button>
+    <span class="ttl">${p.name}</span>
+  </div></div>
+
+  <div class="hero"><div class="in">
+    <p class="kicker">${p.region}</p>
+    <h2>${p.name}</h2>
+    <p class="tag">${p.tag}</p>
+  </div>${horizon(p.horizon,p.accent)}</div>
+
+  <dl class="vitals">
+    <div class="vital"><dt>Go when</dt><dd>${p.when}</dd></div>
+    <div class="vital"><dt>How long</dt><dd>${p.days}</dd></div>
+    <div class="vital"><dt>Budget, solo</dt><dd>${p.budget}</dd></div>
+    <div class="vital"><dt>Where you stand</dt><dd id="statdisp">${r.status}</dd></div>
+  </dl>
+
+  <div class="sec"><h3>Why this one</h3><p>${p.why}</p></div>
+
+  <div class="sec"><h3>Day by day</h3>
+    <ol class="itin">${p.itin.map(i=>`<li><span class="d">${i.d}</span>
+      <span><span class="t">${i.t}</span><span class="x">${i.x}</span></span></li>`).join('')}</ol>
+  </div>
+
+  <div class="sec"><h3>Where to sleep</h3>
+    <ul class="stays">${p.stay.map(s=>`<li><b>${s.n}</b><br>${s.x}</li>`).join('')}</ul>
+  </div>
+
+  <div class="sec"><h3>Worth knowing</h3>
+    <ul class="tips">${p.tips.map(t=>`<li>${t}</li>`).join('')}</ul>
+  </div>
+
+  <div class="sec"><h3>Look it up</h3>
+    <div class="links">${p.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.l}</a>`).join('')}
+      <a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(p.name+' '+p.region)}" target="_blank" rel="noopener">Find photos</a>
+    </div>
+  </div>
+
+  <div class="sec"><h3>Mood board</h3>
+    <div class="board" id="board"></div>
+    <div class="addimg">
+      <input id="imgurl" type="url" placeholder="Paste an image link" inputmode="url">
+      <button id="addimg">Add</button>
+    </div>
+    <p class="hint">Right-click or long-press any photo online, copy the image address, paste it here. Saved on this device.</p>
+  </div>
+
+  <div class="sec"><h3>Where you stand</h3>
+    <div class="statusrow" id="statusrow">
+      ${STATUSES.map(s=>`<button data-s="${s}" aria-pressed="${r.status===s}">${s}</button>`).join('')}
+    </div>
+    <textarea id="notes" placeholder="Who you'd bring, what you'd cut, dates you're circling…">${r.notes.replace(/</g,'&lt;')}</textarea>
+    <p class="saved" id="saved"></p>
+  </div>
+
+  <div class="foot">Chapter ${PLACES.indexOf(p)+1} of ${PLACES.length}</div>`;
+
+  viewEl.classList.add('open');
+  document.body.classList.add('locked');
+  viewEl.scrollTop=0;
+  document.getElementById('back').focus();
+
+  document.getElementById('back').onclick=close;
+
+  const flash=(m)=>{const s=document.getElementById('saved');s.textContent=m;
+    clearTimeout(flash.t);flash.t=setTimeout(()=>s.textContent='',1800);};
+
+  document.getElementById('statusrow').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-s]'); if(!b) return;
+    r.status=b.dataset.s; touch(id);
+    [...e.currentTarget.children].forEach(c=>c.setAttribute('aria-pressed',c===b));
+    document.getElementById('statdisp').textContent=r.status;
+    flash(save()?'Saved':'Could not save on this device');
+    renderPost();
+  });
+
+  const ta=document.getElementById('notes');
+  let t; ta.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{
+    r.notes=ta.value; touch(id); flash(save()?'Notes saved':'Could not save on this device');},600);});
+
+  function drawBoard(){
+    const b=document.getElementById('board');
+    b.innerHTML=r.imgs.map((u,i)=>`<figure><img src="${u}" alt="" loading="lazy"
+      onerror="this.parentNode.style.display='none'"><button class="rm" data-i="${i}"
+      aria-label="Remove photo">&times;</button></figure>`).join('');
+    b.onclick=e=>{const x=e.target.closest('.rm'); if(!x)return;
+      r.imgs.splice(+x.dataset.i,1); touch(id); save(); drawBoard();};
+  }
+  drawBoard();
+
+  document.getElementById('addimg').onclick=()=>{
+    const f=document.getElementById('imgurl'), u=f.value.trim();
+    if(!/^https?:\/\//i.test(u)){ flash('That needs to be a link starting with http'); return; }
+    r.imgs.push(u); f.value=''; touch(id); save(); drawBoard();
+  };
+  document.getElementById('imgurl').addEventListener('keydown',e=>{
+    if(e.key==='Enter') document.getElementById('addimg').click();});
+}
+
+function close(){
+  viewEl.classList.remove('open');
+  document.body.classList.remove('locked');
+  window.scrollTo({top:0});
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewEl.classList.contains('open'))close();});
+
+renderPost();
+
+document.getElementById('setupbtn').addEventListener('click',setup);
+document.getElementById('setupbtn').addEventListener('contextmenu',e=>{
+  e.preventDefault(); changeUrl();
+});
+if(linked()){ pull(); } else { syncMsg('Not syncing yet','warn'); }
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden && linked()) pull(true);
+});
+</script>
+</body>
+</html>
