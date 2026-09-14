@@ -307,6 +307,60 @@ textarea{
 .stays a:hover{border-color:var(--accent)}
 .tips a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
 
+/* ---------- years view ---------- */
+const YEARS=[2027,2028,2029,2030,2031];
+const MON=['January','February','March','April','May','June',
+           'July','August','September','October','November','December'];
+const calEl=document.getElementById('cal');
+
+function chip(pl,ghost){
+  const t=tint_(pl.accent,.26);
+  return `<button class="trip${ghost?' ghost':''}" data-go="${pl.id}"
+    style="--c:${t};--k:${pl.accent}">${pl.name}<span class="dur">${pl.days}</span></button>`;
+}
+
+function drawCal(){
+  let html='<div class="years">';
+  YEARS.forEach(y=>{
+    let rows='';
+    for(let m=1;m<=12;m++){
+      const solid=PLACES.filter(pl=>{const r=rec(pl.id);return r.plan&&r.plan.y===y&&r.plan.m===m;});
+      const ghosts=PLACES.filter(pl=>!rec(pl.id).plan&&pl.target&&pl.target.y===y&&pl.target.m===m);
+      const free = m===7?'free week of the 4th' : m===12?'free week' : '';
+      rows+=`<div class="mo${free?' freewk':''}">
+        <span class="lbl">${MON[m-1].slice(0,3)}</span>
+        <span class="slots">${solid.map(pl=>chip(pl,false)).join('')}
+          ${ghosts.map(pl=>chip(pl,true)).join('')}
+          ${free?`<span class="freetag">${free}</span>`:''}</span></div>`;
+    }
+    const n=PLACES.filter(pl=>{const r=rec(pl.id);return r.plan&&r.plan.y===y;}).length;
+    html+=`<div class="yr"><h3>${y}${y===2029?'<span>15 years at Lilly — 220 hours</span>':
+      (n?`<span>${n} trip${n>1?'s':''} placed</span>`:'')}</h3>${rows}</div>`;
+  });
+  html+='</div>';
+
+  const loose=PLACES.filter(pl=>!rec(pl.id).plan&&!pl.target);
+  if(loose.length) html+=`<div class="years"><div class="unplaced">
+    <h4>Not placed yet</h4>
+    <div class="slots">${loose.map(pl=>chip(pl,true)).join('')}</div></div></div>`;
+
+  calEl.innerHTML=html;
+  calEl.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>open(b.dataset.go));
+}
+
+let mode='sign';
+function setMode(m){
+  mode=m;
+  document.getElementById('mSign').setAttribute('aria-pressed',m==='sign');
+  document.getElementById('mCal').setAttribute('aria-pressed',m==='cal');
+  postsEl.hidden = m!=='sign';
+  document.getElementById('filters').closest('.band').hidden = m!=='sign';
+  calEl.hidden = m!=='cal';
+  if(m==='cal') drawCal();
+}
+document.getElementById('mSign').onclick=()=>setMode('sign');
+document.getElementById('mCal').onclick=()=>setMode('cal');
+
 /* ---------- photo viewer ---------- */
 .lb{
   position:fixed;inset:0;z-index:80;background:rgba(28,25,22,.94);
@@ -339,6 +393,53 @@ textarea{
 .board figure{cursor:zoom-in}
 @media (max-width:520px){
   .lb-nav{width:44px;height:64px;font-size:2rem;background:rgba(0,0,0,.3)}
+}
+
+/* ---------- years view ---------- */
+.modes{display:flex;justify-content:center;gap:.4rem;margin:.4rem auto 1.4rem;width:var(--wrap)}
+.mode{
+  padding:.4rem .95rem;border:1px solid var(--rule);border-radius:100px;
+  font-size:.84rem;color:var(--ink-2);background:var(--linen-2);
+}
+.mode[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--linen)}
+#cal[hidden]{display:none}
+.years{width:var(--wrap);margin:0 auto;padding-bottom:3rem}
+.yr + .yr{margin-top:2.2rem}
+.yr h3{
+  font-family:var(--serif);font-size:1.9rem;font-weight:300;
+  padding-bottom:.4rem;border-bottom:1px solid var(--rule);margin-bottom:.2rem;
+}
+.yr h3 span{font-family:var(--sans);font-size:.78rem;color:var(--ink-3);margin-left:.6rem}
+.mo{display:grid;grid-template-columns:3.1rem 1fr;gap:.7rem;align-items:start;
+  padding:.42rem 0;border-bottom:1px solid rgba(62,58,52,.07)}
+.mo .lbl{font-size:.8rem;color:var(--ink-3);padding-top:.22rem}
+.mo.freewk .lbl{color:var(--ink-2)}
+.mo .slots{display:flex;flex-wrap:wrap;gap:.35rem;min-height:1.5rem}
+.trip{
+  display:inline-flex;align-items:baseline;gap:.45rem;max-width:100%;
+  padding:.28rem .7rem;border-radius:3px;font-size:.84rem;
+  background:var(--c);border-left:4px solid var(--k);color:var(--ink);
+}
+.trip .dur{font-size:.74rem;color:var(--ink-3)}
+.trip.ghost{background:transparent;border:1px dashed var(--rule);border-left:4px solid var(--k);
+  color:var(--ink-3);font-style:italic}
+.freetag{
+  font-size:.7rem;letter-spacing:.04em;color:var(--ink-3);
+  border:1px solid var(--rule);border-radius:100px;padding:.16rem .55rem;align-self:center;
+}
+.unplaced{margin-top:2.4rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.unplaced h4{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-3);margin-bottom:.7rem}
+.unplaced .slots{display:flex;flex-wrap:wrap;gap:.35rem}
+.whenrow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.whenrow select{
+  background:#FFF;border:1px solid var(--rule);color:var(--ink);
+  padding:.45rem .6rem;border-radius:3px;font:inherit;font-size:.88rem;
+}
+.whenrow button{font-size:.82rem;color:var(--ink-3);border-bottom:1px solid var(--rule)}
+@media (min-width:760px){
+  .years{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2.4rem}
+  .yr + .yr{margin-top:0}
+  .yr{margin-bottom:2.2rem}
 }
 
 @media (min-width:680px){
@@ -376,7 +477,13 @@ textarea{
   <p><button class="setupbtn" id="setupbtn">Enter access code to sync</button></p>
 </header>
 
+<div class="modes" role="group" aria-label="View">
+  <button id="mSign" class="mode" aria-pressed="true">The signpost</button>
+  <button id="mCal" class="mode" aria-pressed="false">The years</button>
+</div>
+
 <div class="weave" aria-hidden="true"></div>
+<section id="cal" hidden></section>
 <nav id="posts" aria-label="Destinations"></nav>
 
 <section class="band">
@@ -410,7 +517,7 @@ const PLACES = [
 {
   id:'nm', moment:'Woodsmoke and roasting chile, and a sky so clear the mountains look closer than they are.',
   name:'Northern New Mexico', tag:'High desert, adobe, thin bright air',
-  accent:'#C1663A', horizon:'mesa', art:'img/nm.jpg',
+  accent:'#C1663A', horizon:'mesa', art:'img/nm.jpg', target:{y:2027,m:10},
   region:'Santa Fe \u00b7 Taos \u00b7 Abiqui\u00fa',
   days:'6 days', budget:'$2,607', when:'Late Sept \u2013 mid Oct',
   why:'This is the restful version of New Mexico \u2014 the northern Rio Grande only, no southern loop, about a third of the driving. You sleep in three places across six days instead of six. Santa Fe and Taos are four-hundred-year-old towns built of mud and timber, where the light does something to colour that photographs cannot quite hold. Taos Pueblo has been continuously inhabited for a thousand years. The food is its own cuisine, not a regional variation of anything else. And at seven thousand feet the air is so clear that distance stops reading correctly.',
@@ -796,7 +903,7 @@ const PLACES = [
 {
   id:'camino', scope:'world', moment:'Fourteen mornings of walking east into the light with everything you need on your back.',
   name:'The Camino de Santiago', tag:'Two weeks on foot across northern Spain',
-  accent:'#6A7BA2', horizon:'meseta', art:'img/camino.jpg',
+  accent:'#6A7BA2', horizon:'meseta', art:'img/camino.jpg', target:{y:2029,m:9},
   region:'Le\u00f3n to Santiago \u00b7 Camino Franc\u00e9s',
   days:'17 days', budget:'$3,400', when:'September 2029',
   why:'The full Camino Franc\u00e9s is 500 miles and thirty-four walking days, and waiting until you have five free weeks is exactly how this stays a someday. So walk the last third: Le\u00f3n to Santiago, 190 miles, fourteen days on foot. It is the real route, not an abbreviated version \u2014 the Cruz de Ferro where you leave a stone carried from home, the climb over O Cebreiro where the language and the weather both change, and the long green descent into Galicia. You arrive in the cathedral square on legs that did the work. Your fifteen-year service year gives you 220 hours, and this is what they are for. One advantage most pilgrims do not have: you will be talking with hospitaleros and Spanish walkers in the villages, not pointing at menus. That is a different trip.',
@@ -920,7 +1027,7 @@ const PLACES = [
 {
   id:'greece', scope:'world', moment:'Whitewash, bougainvillea, and the sea a colour you will not believe until you see it.',
   name:'The Greek Islands', tag:'Seven nights in the Aegean with Isa and Camila',
-  accent:'#5AA7AC', horizon:'aegean', art:'img/greece.jpg',
+  accent:'#5AA7AC', horizon:'aegean', art:'img/greece.jpg', target:{y:2027,m:5},
   region:'Athens \u00b7 Cyclades \u00b7 Ephesus',
   days:'11 days', budget:'$3,400 each', when:'Late May 2027',
   why:'This one is already half-decided \u2014 Celestyal\u2019s Idyllic Aegean, seven nights round-trip from Piraeus, with Isa and Camila. The cruise solves the hard part of Greek island travel, which is that ferries between islands eat whole days; you wake up somewhere new each morning without repacking. Late May is the better trip on every measure except one: the water is cooler than July, but the islands are still green, the crowds have not arrived and the fares drop noticeably. The one risk is softball. College season runs through May, and if Earlham goes deep into conference tournaments, late May disappears. Decide in autumn 2026 once you see the spring schedule; the fallback is the free week of 4 July, which costs no vacation days and is the week everyone is reliably free.',
@@ -1158,6 +1265,24 @@ function open(id){
     <p class="hint">Right-click or long-press any photo online, copy the image address, paste it here. Saved on this device.</p>
   </div>
 
+  <div class="sec"><h3>When</h3>
+    <div class="whenrow">
+      <select id="wYear" aria-label="Year">
+        <option value="">Year…</option>
+        ${[2027,2028,2029,2030,2031].map(y=>`<option value="${y}"
+          ${r.plan&&r.plan.y===y?'selected':''}>${y}</option>`).join('')}
+      </select>
+      <select id="wMon" aria-label="Month">
+        <option value="">Month…</option>
+        ${['January','February','March','April','May','June','July','August',
+           'September','October','November','December'].map((n,i)=>`<option value="${i+1}"
+          ${r.plan&&r.plan.m===i+1?'selected':''}>${n}</option>`).join('')}
+      </select>
+      <button id="wClear">Clear</button>
+    </div>
+    <p class="note" id="wNote"></p>
+  </div>
+
   <div class="sec"><h3>Where you stand</h3>
     <div class="statusrow" id="statusrow">
       ${STATUSES.map(s=>`<button data-s="${s}" aria-pressed="${r.status===s}">${s}</button>`).join('')}
@@ -1174,6 +1299,20 @@ function open(id){
   document.getElementById('back').focus();
 
   document.getElementById('back').onclick=close;
+
+  const wy=document.getElementById('wYear'), wm=document.getElementById('wMon'),
+        wn=document.getElementById('wNote');
+  function wSync(){
+    const y=+wy.value, m=+wm.value;
+    if(y&&m){ r.plan={y,m}; wn.textContent=''; }
+    else if(y||m){ wn.textContent='Pick both a year and a month to place it on the calendar.'; return; }
+    else { r.plan=null; wn.textContent=''; }
+    touch(id); save(); flash('Saved');
+    if(mode==='cal') drawCal();
+  }
+  wy.onchange=wSync; wm.onchange=wSync;
+  document.getElementById('wClear').onclick=()=>{wy.value='';wm.value='';wSync();};
+  if(!r.plan && p.target) wn.textContent=`Suggested: ${MON[p.target.m-1]} ${p.target.y}. Pick it above to lock it in.`;
 
   const flash=(m)=>{const s=document.getElementById('saved');s.textContent=m;
     clearTimeout(flash.t);flash.t=setTimeout(()=>s.textContent='',1800);};
