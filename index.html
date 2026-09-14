@@ -103,7 +103,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   padding:1.15rem 3.1rem 1.15rem 1.55rem;margin-bottom:.55rem;min-height:86px;
   background-color:var(--tint);
   background-image:var(--pic,none);
-  background-size:auto 100%;background-position:right center;background-repeat:no-repeat;
+  background-size:auto 112%;background-position:right center;background-repeat:no-repeat;
+  background-blend-mode:multiply;
   border-radius:3px;
   color:var(--ink);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 2px 5px rgba(62,58,52,.13);
@@ -117,9 +118,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .sign::after{
   content:"";position:absolute;inset:0;border-radius:3px;
   background:linear-gradient(90deg,
-    var(--tint) 0%, var(--tint) 44%,
-    color-mix(in srgb, var(--tint) 55%, transparent) 66%,
-    transparent 86%);
+    var(--tint) 0%,
+    var(--tint) 26%,
+    color-mix(in srgb, var(--tint) 78%, transparent) 45%,
+    color-mix(in srgb, var(--tint) 34%, transparent) 64%,
+    transparent 82%);
 }
 .sign > *{position:relative;z-index:2}
 .sign:nth-child(odd){transform:rotate(-.35deg)}
@@ -662,7 +665,7 @@ const PLACES = [
 },
 {
   id:'lowcountry', moment:'Spartina grass going gold at low tide, and Spanish moss barely moving.', name:'The Gullah Geechee Lowcountry', tag:'Marsh gold, tidal creeks, a language you have never heard',
-  accent:'#C2973F', horizon:'marsh',
+  accent:'#C2973F', horizon:'marsh', art:'img/lowcountry.jpg',
   region:'Charleston · Beaufort · the Sea Islands',
   days:'5 days', budget:'$1,800', when:'March–May or October–November',
   why:'The Sea Islands off South Carolina and Georgia hold a culture most Americans do not know exists — Gullah Geechee, descended from West Africans brought to the rice plantations, with its own creole language, its own foodways, its own sweetgrass basketry traced directly to Sierra Leone. The land is flat, tidal, and gold in autumn: spartina grass, live oaks under Spanish moss, creeks that fill and empty twice a day. Warm, easy walking, superb flat-water paddling, and history told from a perspective you will not have encountered.',
@@ -694,7 +697,7 @@ const PLACES = [
 },
 {
   id:'bigbend', moment:'So dark you can see your own shadow by starlight.', name:'Big Bend & Marfa', tag:'The darkest sky in the country',
-  accent:'#9E4A42', horizon:'mesa',
+  accent:'#9E4A42', horizon:'mesa', art:'img/bigbend.jpg',
   region:'West Texas · Rio Grande',
   days:'6 days', budget:'$2,800', when:'March–April or October–November',
   why:'The emptiest corner of the lower 48. Big Bend is the size of Rhode Island with a few hundred people in it, the Rio Grande running through 1,500-foot limestone canyons, and a certified dark sky where you can see your own shadow by starlight. Then Marfa — a former railroad town in the middle of nothing that became a minimalist art destination, where Donald Judd installed a hundred aluminum boxes in old artillery sheds. The combination of absolute emptiness and deliberate art is genuinely disorienting in a good way.',
@@ -727,7 +730,7 @@ const PLACES = [
 },
 {
   id:'olympic', moment:'Moss hanging in curtains, water dripping somewhere, and no other sound at all.', name:'Olympic Peninsula', tag:'Rainforest, sea stacks, alpine ridge — one hour apart',
-  accent:'#5F7256', horizon:'forest',
+  accent:'#5F7256', horizon:'forest', art:'img/olympic.jpg',
   region:'Forks · Lake Quinault · Port Angeles',
   days:'6 days', budget:'$2,200', when:'July – September',
   why:'One park holding three completely separate worlds. The Hoh is a temperate rainforest — twelve feet of rain a year, moss hanging in curtains, trees three hundred feet tall. An hour west is a wild Pacific coast of sea stacks and driftwood where the tide pools are full. An hour east is Hurricane Ridge with alpine meadows and glaciers in view. Cool, damp, green and profoundly quiet. Tribal-run coastal towns, no crowds compared to the big western parks, and cheap.',
@@ -759,7 +762,7 @@ const PLACES = [
 },
 {
   id:'bigisland', moment:'Snow on the summit behind you, and lava glowing on the horizon ahead.', name:'Hawai\'i, the Big Island', tag:'Lava, snow and rainforest on one island',
-  accent:'#7E4A45', horizon:'volcano',
+  accent:'#7E4A45', horizon:'volcano', art:'img/bigisland.jpg',
   region:'Volcano · Hilo · Kona',
   days:'8 days', budget:'$5,500', when:'April–May or Sept–Oct',
   why:'The most geographically extreme place in the country. Eleven of the world\'s thirteen climate zones on a single island: active lava fields, black sand beaches, a 13,800-foot summit that gets snow, and rainforest that gets 130 inches of rain. Kīlauea has been erupting on and off for decades and you can stand at the caldera rim. If Kaua\'i is the restful Hawai\'i, this is the astonishing one. Do this if the point is to see something you cannot quite believe.',
@@ -792,7 +795,7 @@ const PLACES = [
 },
 {
   id:'camino', moment:'Fourteen mornings of walking east into the light with everything you need on your back.', scope:'world', name:'The Camino de Santiago', tag:'Two weeks on foot across northern Spain',
-  accent:'#6A7BA2', horizon:'meseta',
+  accent:'#6A7BA2', horizon:'meseta', art:'img/camino.jpg',
   region:'León to Santiago · Camino Francés',
   days:'17 days', budget:'$3,200', when:'May–June or September',
   why:'The full Camino Francés is 500 miles and 34 days, and waiting until you have five weeks free is how this stays a someday. So walk the last third: León to Santiago, 190 miles, fourteen days of walking. It is the real route, not an abbreviated version — the Cruz de Ferro where you leave a stone carried from home, the climb over O Cebreiro into Galicia where the language and the weather both change, and the long green descent into Santiago. You arrive in the cathedral square having actually earned it. And you will be having real conversations in the villages rather than pointing at menus, which is a different trip than most pilgrims get.',
@@ -838,7 +841,7 @@ const PLACES = [
 },
 {
   id:'greece', moment:'Whitewash, bougainvillea, and the sea a color you will not believe until you see it.', scope:'world', name:'The Greek Islands', tag:'Seven nights in the Aegean with Isa and Camila',
-  accent:'#5AA7AC', horizon:'aegean',
+  accent:'#5AA7AC', horizon:'aegean', art:'img/greece.jpg',
   region:'Athens · Cyclades · Dodecanese',
   days:'11 days', budget:'$3,400 each', when:'September',
   why:'This one is already half-decided — a 7-night Celestyal sailing in September, with Isa and Camila. September is the right call: the sea is at its warmest after a summer of heating, the crowds thin after the August peak, and the light goes long and gold. The cruise solves the hard part of Greek island travel, which is that ferries between islands eat entire days. You wake up somewhere new each morning without repacking. Bookend it with Athens on both sides so the trip has land under it — the Acropolis is not a port excursion.',
