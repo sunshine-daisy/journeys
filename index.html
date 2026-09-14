@@ -100,8 +100,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .sign{
   display:block;width:100%;text-align:left;position:relative;
-  padding:.95rem 3.1rem .95rem 1.55rem;margin-bottom:.5rem;
-  background:var(--tint);border-radius:3px;
+  padding:1.15rem 3.1rem 1.15rem 1.55rem;margin-bottom:.55rem;min-height:86px;
+  background-color:var(--tint);
+  background-image:var(--pic,none);
+  background-size:auto 100%;background-position:right center;background-repeat:no-repeat;
+  border-radius:3px;
   color:var(--ink);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 2px 5px rgba(62,58,52,.13);
   transition:transform .16s ease;
@@ -109,13 +112,21 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .sign::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:7px;
-  background:var(--sc);
+  background:var(--sc);z-index:2;
 }
+.sign::after{
+  content:"";position:absolute;inset:0;border-radius:3px;
+  background:linear-gradient(90deg,
+    var(--tint) 0%, var(--tint) 44%,
+    color-mix(in srgb, var(--tint) 55%, transparent) 66%,
+    transparent 86%);
+}
+.sign > *{position:relative;z-index:2}
 .sign:nth-child(odd){transform:rotate(-.35deg)}
 .sign:nth-child(even){transform:rotate(.35deg);margin-left:auto;width:calc(100% - 8px)}
 .sign:hover,.sign:focus-visible{transform:rotate(0deg) translateX(4px)}
-.sign .nm{font-family:var(--serif);font-size:1.16rem;font-weight:500;display:block;line-height:1.2}
-.sign .tg{display:block;font-size:.8rem;color:var(--ink-2);margin-top:.15rem}
+.sign .nm{position:relative;z-index:2;font-family:var(--serif);font-size:1.16rem;font-weight:500;display:block;line-height:1.2}
+.sign .tg{position:relative;z-index:2;display:block;font-size:.8rem;color:var(--ink-2);margin-top:.15rem}
 .sign .st{
   position:absolute;right:2.4rem;top:50%;transform:translateY(-50%);
   width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);
@@ -293,6 +304,40 @@ textarea{
 .stays a:hover{border-color:var(--accent)}
 .tips a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
 
+/* ---------- photo viewer ---------- */
+.lb{
+  position:fixed;inset:0;z-index:80;background:rgba(28,25,22,.94);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s ease;
+}
+.lb.on{opacity:1}
+.lb[hidden]{display:none}
+.lb img{
+  max-width:92vw;max-height:84vh;object-fit:contain;display:block;
+  border-radius:3px;box-shadow:0 8px 40px rgba(0,0,0,.5);
+  touch-action:pan-y;
+}
+.lb-x{
+  position:absolute;top:.7rem;right:.9rem;width:44px;height:44px;
+  color:#FAF9F6;font-size:1.9rem;line-height:1;border-radius:50%;
+}
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:74px;color:#FAF9F6;font-size:2.4rem;line-height:1;
+  background:rgba(0,0,0,.22);border-radius:4px;
+}
+.lb-prev{left:.4rem}
+.lb-next{right:.4rem}
+.lb-nav:hover,.lb-x:hover{background:rgba(255,255,255,.16)}
+.lb-count{
+  position:absolute;bottom:1rem;left:0;right:0;text-align:center;
+  color:rgba(250,249,246,.72);font-size:.85rem;margin:0;
+}
+.board figure{cursor:zoom-in}
+@media (max-width:520px){
+  .lb-nav{width:44px;height:64px;font-size:2rem;background:rgba(0,0,0,.3)}
+}
+
 @media (min-width:680px){
   .board{grid-template-columns:repeat(3,1fr)}
   .vitals{grid-template-columns:repeat(4,1fr)}
@@ -345,6 +390,14 @@ textarea{
 </footer>
 
 <div class="view" id="view" role="dialog" aria-modal="true" aria-label="Trip chapter"></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lb-x" id="lbClose" aria-label="Close photo">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <img id="lbImg" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
+  <p class="lb-count" id="lbCount"></p>
+</div>
 
 <script>
 /* ============================================================
@@ -446,7 +499,7 @@ const PLACES = [
 },
 {
   id:'kauai', moment:'Warm rain passing over in five minutes, then the cliffs steaming in the sun.', name:'Kaua\'i', tag:'Green cliffs, warm water, nothing to prove',
-  accent:'#47786B', horizon:'cliffs',
+  accent:'#47786B', horizon:'cliffs', art:'img/kauai.jpg',
   region:'Hanalei · Poipu · Waimea',
   days:'8 days', budget:'$4,800', when:'April–May or Sept–Oct',
   why:'The oldest Hawaiian island and the least developed. No building taller than a palm tree, one road that does not quite circle the island, and a north shore of fluted green cliffs that look invented. Hawaiian culture here is lived rather than performed — the language on road signs, taro fields still farmed in Hanalei, hula that is not a dinner show. The water is 78°F and the Wailua River and Hanalei Bay are among the best flat-water paddleboarding anywhere. This is the one on the list built for rest rather than motion.',
@@ -480,7 +533,7 @@ const PLACES = [
 },
 {
   id:'maine', moment:'The sound of a wooden hull under sail, and nothing else, for three days.', name:'A Maine Windjammer', tag:'Three days under sail, no engine, no signal',
-  accent:'#5A7A93', horizon:'islands',
+  accent:'#5A7A93', horizon:'islands', art:'img/maine.jpg',
   region:'Camden · Penobscot Bay · Acadia',
   days:'7 days', budget:'$2,600', when:'Late June – September',
   why:'A restored wooden schooner, twenty passengers, no engine and no itinerary. The captain reads the wind each morning and decides where you sleep that night — a different island cove every time. Lobster cooked on a beach. You help hoist a sail if you want to and read on deck if you do not. It is the most genuinely restorative thing on this list because it takes decisions away from you instead of adding them, which is not something you get much of. Add Acadia after for the mountains-meeting-ocean part.',
@@ -514,7 +567,7 @@ const PLACES = [
 },
 {
   id:'sanjuans', moment:'Cold clean air off the water, and a pod of orcas surfacing where you were just looking.', name:'San Juan Islands', tag:'Cool green water, orcas, farm stands',
-  accent:'#8FA98C', horizon:'islands',
+  accent:'#8FA98C', horizon:'islands', art:'img/sanjuans.jpg',
   region:'Orcas · San Juan · Lopez',
   days:'6 days', budget:'$2,400', when:'June – September',
   why:'An archipelago in the rain shadow of the Olympics — sunnier and drier than Seattle, cool enough to sleep with the window open in August. You get there by ferry, which slows everything down before you arrive. Orcas Island has a 2,400-foot mountain you can drive up, protected water for paddling, and farm stands run on the honor system. No chains. No nightlife. Resident orca pods and humpbacks in the channels. Calm without being empty.',
@@ -546,7 +599,7 @@ const PLACES = [
 },
 {
   id:'hudson', moment:'Standing alone in a room the size of a factory floor, with one enormous sculpture in it.', name:'Hudson Valley & the Berkshires', tag:'Enormous art in old buildings',
-  accent:'#9C7A93', horizon:'hills',
+  accent:'#9C7A93', horizon:'hills', art:'img/hudson.jpg',
   region:'Beacon · Hudson · North Adams',
   days:'5 days', budget:'$2,000', when:'May–June or late Sept–Oct',
   why:'If what you want is to think differently for a week, this is the one. Former factories and box-printing plants converted into art spaces at a scale that does not exist anywhere else — Dia Beacon is a Nabisco plant holding room-sized minimalist work, Mass MoCA occupies 26 buildings of a shuttered mill. Storm King is 500 acres of sculpture set in landscape you walk through. Between them: Shaker villages, river towns, farm restaurants, and hills that turn in October. Short drives, small towns, no wilderness required.',
@@ -578,7 +631,7 @@ const PLACES = [
 },
 {
   id:'cajun', moment:'An accordion starting up at eight in the morning, and everybody gets out of their chair.', name:'Cajun Louisiana', tag:'French at the gas station, cypress at dawn',
-  accent:'#9A6B4F', horizon:'swamp',
+  accent:'#9A6B4F', horizon:'swamp', art:'img/cajun.jpg',
   region:'Lafayette · Breaux Bridge · Atchafalaya',
   days:'5 days', budget:'$1,400', when:'March–May or October',
   why:'Not New Orleans. Two hours west is Acadiana, where people descended from Nova Scotian exiles still speak French, and the music, the food and the landscape are all things you have not encountered. Zydeco breakfast dances on Saturday mornings — actual dancing, at 8am, with no bar involved. The Atchafalaya is the largest river swamp in the country and at sunrise it is silent and enormous. This is the cheapest trip on the list and the one that will surprise you most per dollar.',
@@ -978,6 +1031,7 @@ function signFor(p){
   b.style.setProperty('--sc',p.accent);
   b.style.setProperty('--tint',tint_(p.accent,.30));
   b.style.setProperty('--sd',inkAccent(p.accent));
+  if(p.art) b.style.setProperty('--pic',`url("${p.art}")`);
   b.innerHTML=`<i class="nail a"></i><i class="nail b"></i>
     <span class="nm">${p.name}</span><span class="tg">${p.tag}</span>
     <span class="st" title="${r.status}">${glyph(r.status)}</span>`;
@@ -1139,8 +1193,15 @@ function open(id){
     b.innerHTML=r.imgs.map((u,i)=>`<figure><img src="${u}" alt="" loading="lazy"
       onerror="this.parentNode.style.display='none'"><button class="rm" data-i="${i}"
       aria-label="Remove photo">&times;</button></figure>`).join('');
-    b.onclick=e=>{const x=e.target.closest('.rm'); if(!x)return;
-      r.imgs.splice(+x.dataset.i,1); touch(id); save(); drawBoard();};
+    b.onclick=e=>{
+      const x=e.target.closest('.rm');
+      if(x){ r.imgs.splice(+x.dataset.i,1); touch(id); save(); drawBoard(); return; }
+      const fig=e.target.closest('figure');
+      if(!fig) return;
+      const shown=[...b.querySelectorAll('figure')].filter(f=>f.style.display!=='none');
+      const urls=shown.map(f=>f.querySelector('img').src);
+      lbOpen(urls, shown.indexOf(fig));
+    };
   }
   drawBoard();
 
@@ -1153,12 +1214,57 @@ function open(id){
     if(e.key==='Enter') document.getElementById('addimg').click();});
 }
 
+/* ---------- photo viewer ---------- */
+const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
+      lbCount=document.getElementById('lbCount');
+let lbList=[], lbAt=0;
+
+function lbShow(){
+  lbImg.src=lbList[lbAt];
+  lbCount.textContent=lbList.length>1?`${lbAt+1} of ${lbList.length}`:'';
+  document.getElementById('lbPrev').style.display=lbList.length>1?'':'none';
+  document.getElementById('lbNext').style.display=lbList.length>1?'':'none';
+}
+function lbOpen(list,i){
+  lbList=list; lbAt=i;
+  lb.hidden=false; lbShow();
+  requestAnimationFrame(()=>lb.classList.add('on'));
+  document.body.classList.add('locked');
+  document.getElementById('lbClose').focus();
+}
+function lbClose(){
+  lb.classList.remove('on');
+  setTimeout(()=>{lb.hidden=true;lbImg.src='';},200);
+  if(!viewEl.classList.contains('open')) document.body.classList.remove('locked');
+}
+function lbStep(n){
+  if(lbList.length<2) return;
+  lbAt=(lbAt+n+lbList.length)%lbList.length;
+  lbShow();
+}
+document.getElementById('lbClose').onclick=lbClose;
+document.getElementById('lbPrev').onclick=e=>{e.stopPropagation();lbStep(-1);};
+document.getElementById('lbNext').onclick=e=>{e.stopPropagation();lbStep(1);};
+lb.addEventListener('click',e=>{if(e.target===lb||e.target===lbImg&&false) lbClose();});
+document.addEventListener('keydown',e=>{
+  if(lb.hidden) return;
+  if(e.key==='Escape'){e.stopPropagation();lbClose();}
+  if(e.key==='ArrowLeft') lbStep(-1);
+  if(e.key==='ArrowRight') lbStep(1);
+});
+let tx=0;
+lb.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;},{passive:true});
+lb.addEventListener('touchend',e=>{
+  const d=e.changedTouches[0].clientX-tx;
+  if(Math.abs(d)>48) lbStep(d<0?1:-1);
+},{passive:true});
+
 function close(){
   viewEl.classList.remove('open');
   document.body.classList.remove('locked');
   window.scrollTo({top:0});
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewEl.classList.contains('open'))close();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.hidden&&viewEl.classList.contains('open'))close();});
 
 renderPost();
 
