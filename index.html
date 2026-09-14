@@ -159,7 +159,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .hero .kicker{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--accent)}
 .hero h2{font-size:clamp(2rem,8.5vw,3rem);font-weight:300;margin:.45rem 0 .5rem}
 .hero .tag{font-size:1rem;color:var(--ink-2)}
-.horizon{display:block;width:100%;height:118px;margin-top:1.4rem}
 
 .vitals{
   width:var(--wrap);margin:0 auto;display:grid;
@@ -264,7 +263,8 @@ textarea{
 .emptystate svg{width:54px;height:54px;color:var(--ink-3);margin-bottom:.6rem}
 
 /* ---------- atmosphere ---------- */
-.horizon{display:block;width:100%;height:184px;margin-top:1.5rem}
+.band-art{margin-top:1.6rem;height:58px;background:var(--t);position:relative}
+.band-art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;background:var(--a)}
 .hero{padding:2.6rem 0 0}
 .hero h2{font-size:clamp(2.1rem,9vw,3.2rem);margin:.5rem 0 .55rem}
 .moment{
@@ -281,6 +281,15 @@ textarea{
 }
 .vitals{margin-top:1.8rem}
 .sec{padding:2.4rem 0 0}
+
+.note{font-size:.84rem;color:var(--ink-3);margin:-.4rem 0 .7rem}
+.quiet{color:var(--ink-3)}
+.rate{float:right;font-family:var(--serif);font-size:.95rem;color:var(--accent)}
+.cost{display:inline-block;margin-top:.4rem;font-size:.8rem;
+  color:var(--accent);border:1px solid var(--rule);border-radius:100px;padding:.15rem .6rem}
+.stays a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.stays a:hover{border-color:var(--accent)}
+.tips a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
 
 @media (min-width:680px){
   .board{grid-template-columns:repeat(3,1fr)}
@@ -341,36 +350,95 @@ textarea{
    ============================================================ */
 const PLACES = [
 {
-  id:'nm', moment:'Woodsmoke and roasting chile, and a sky so clear the mountains look closer than they are.', name:'Northern New Mexico', tag:'High desert, adobe, thin bright air',
+  id:'nm', moment:'Woodsmoke and roasting chile, and a sky so clear the mountains look closer than they are.',
+  name:'Northern New Mexico', tag:'High desert, adobe, thin bright air',
   accent:'#C1663A', horizon:'mesa',
-  region:'Santa Fe · Taos · Abiquiú',
-  days:'6 days', budget:'$2,600', when:'Late Sept – mid Oct',
-  why:'This is the short, restful version of New Mexico — the northern Rio Grande only, no southern loop, about a third of the driving. You sleep in two places instead of seven. Santa Fe and Taos are 400-year-old towns built of mud and timber where the light does something to color that photographs cannot quite hold. Taos Pueblo has been continuously inhabited for a thousand years. The food is its own cuisine, not a regional variation of anything. And at 7,000 feet the air is so clear that distance stops reading correctly.',
+  region:'Santa Fe \u00b7 Taos \u00b7 Abiqui\u00fa',
+  days:'6 days', budget:'$2,607', when:'Late Sept \u2013 mid Oct',
+  why:'This is the restful version of New Mexico \u2014 the northern Rio Grande only, no southern loop, about a third of the driving. You sleep in three places across six days instead of six. Santa Fe and Taos are four-hundred-year-old towns built of mud and timber, where the light does something to colour that photographs cannot quite hold. Taos Pueblo has been continuously inhabited for a thousand years. The food is its own cuisine, not a regional variation of anything else. And at seven thousand feet the air is so clear that distance stops reading correctly.',
   itin:[
-   {d:'1',t:'Arrive, settle into Santa Fe',x:'Fly into Albuquerque, drive up the Turquoise Trail through Madrid. Take the first evening slow — you have gained 6,000 feet of elevation. Walk the Plaza at dusk.'},
-   {d:'2',t:'Canyon Road and the Plaza',x:'A half-mile of adobe houses turned into 80-odd galleries. Georgia O\'Keeffe Museum in the morning, Canyon Road all afternoon on foot. No driving at all today.'},
-   {d:'3',t:'Bandelier and Los Alamos',x:'Cliff dwellings carved into volcanic ash, with ladders you can climb into the rooms. An easy 1.4-mile loop. Los Alamos on the way back for the strangeness of it.'},
-   {d:'4',t:'Abiquiú and Ghost Ranch',x:'O\'Keeffe country. Red and yellow cliffs, the flat-topped Pedernal. Book the landscape tour in advance. This is the best photography day of the trip.'},
-   {d:'5',t:'High Road to Taos',x:'Up through Chimayó and Truchas — mountain villages, weaving shops, the little adobe sanctuary at Chimayó. Arrive Taos mid-afternoon for the Pueblo in low light.'},
-   {d:'6',t:'Enchanted Circle, then soak',x:'The 84-mile loop through Angel Fire, Eagle Nest and Red River, peak aspen gold in October. Finish at Ojo Caliente mineral springs on the way south.'}
+   {d:'1',t:'Fly in, take the long road up',
+    x:'IND to Albuquerque, then the Turquoise Trail instead of the interstate \u2014 an hour longer, through old mining towns and Madrid, an artists\u2019 colony in a row of painted shacks. Arriving via I-25 means seeing nothing.',
+    cost:'Flight ~$450 pp \u00b7 car + fuel ~$490'},
+   {d:'2',t:'O\u2019Keeffe, then Canyon Road',
+    x:'See the paintings before Abiqui\u00fa, not after \u2014 then you recognise the actual cliffs on day four. Afternoon on Canyon Road: half a mile of adobe houses turned into eighty galleries, on foot, free.',
+    cost:'Museum ~$22 pp'},
+   {d:'3',t:'Bandelier and Los Alamos',
+    x:'Cliff dwellings carved into volcanic ash, with wooden ladders you climb into the rooms. An easy 1.4-mile loop, and you are inside eight-hundred-year-old homes rather than looking at them from behind a rope. Los Alamos twenty minutes on, for the strangeness of a secret city that is now a suburb.',
+    cost:'$25 per vehicle'},
+   {d:'4',t:'Ghost Ranch and Abiqui\u00fa',
+    x:'O\u2019Keeffe country. Red and yellow cliffs, the flat-topped Pedernal. On the landscape tour the guide hands you prints of the paintings and stands you where she stood. Best photography day of the trip.',
+    cost:'Day pass $10 + tour ~$50 pp'},
+   {d:'5',t:'High Road to Taos',
+    x:'Up through Chimay\u00f3 and Truchas \u2014 mountain villages, weaving shops, and a tiny adobe sanctuary worth the stop. Reach Taos mid-afternoon for the light on the Pueblo, where admission includes a guided walk from someone who lives there.',
+    cost:'Taos Pueblo $25 pp'},
+   {d:'6',t:'Enchanted Circle, then soak',
+    x:'Eighty-four miles through Angel Fire, Eagle Nest and Red River \u2014 peak aspen gold in October. Finish at Ojo Caliente, where soaking is included with the room, so it is the closing move rather than a day stop.',
+    cost:'Springs included \u00b7 private pool ~$40'}
   ],
   stay:[
-   {n:'Inn on the Alameda, Santa Fe',x:'Adobe, walkable to Canyon Road, quiet courtyards. ~$240/night.'},
-   {n:'Drury Plaza Hotel, Santa Fe',x:'On the Plaza, rooftop pool with mountain views. ~$220.'},
-   {n:'Hotel La Fonda de Taos',x:'On the Taos Plaza, walk to everything. ~$180.'},
-   {n:'Ojo Caliente Mineral Springs',x:'Worth one night as the closing move, not just a day stop. ~$210.'}
+   {n:'Inn on the Alameda, Santa Fe', u:'https://www.innonthealameda.com', rate:'~$240',
+    x:'Nights 1\u20133. Adobe with walled courtyards, four blocks from the Plaza and right at the foot of Canyon Road. Quiet in a way the Plaza hotels are not, and breakfast is included.'},
+   {n:'Hotel La Fonda de Taos', u:'https://www.hotellafonda.com', rate:'~$180',
+    x:'Night 4. On the Taos Plaza itself, so you park once and walk. Historic, a little worn in the good way, with a small D.H. Lawrence collection in the lobby.'},
+   {n:'Ojo Caliente historic hotel', u:'https://ojosparesorts.com/ojo-caliente/stay/', rate:'~$195',
+    x:'Night 5. Built 1916 \u2014 no TVs, no phones, shared bath down the hall. Spartan on purpose. Springs access 7:30am to 10pm on both days, which is the actual value.'},
+   {n:'Drury Plaza Hotel, Santa Fe', u:'https://www.druryhotels.com', rate:'~$220',
+    x:'Alternative to the Alameda. On the Plaza, rooftop pool with mountain views, evening food included.'}
+  ],
+  eat:[
+   {n:'The Shed, Santa Fe', u:'https://sfshed.com',
+    x:'Red chile enchiladas \u2014 the town\u2019s signature plate since 1953.', note:'Half a block off the Plaza. Reserve, or arrive at 11:30.'},
+   {n:'Cafe Pasqual\u2019s, Santa Fe', u:'https://pasquals.com',
+    x:'Breakfast. A James Beard \u201cAmerica\u2019s Classic\u201d since 1979.', note:'Tiny. Expect a wait, or take a seat at the communal table.'},
+   {n:'Saz\u00f3n, Santa Fe', u:'https://sazonsantafe.com',
+    x:'Moles \u2014 Fernando Olea won a James Beard for them.', note:'The splurge dinner. Book well ahead.'},
+   {n:'Tia Sophia\u2019s, Santa Fe', u:'https://www.tiasophias.com',
+    x:'Breakfast burrito, green chile, downtown diner.', note:'Where locals actually eat.'},
+   {n:'Rancho de Chimay\u00f3', u:'https://ranchodechimayo.com',
+    x:'Carne adovada \u2014 pork slow-braised in red chile. Another James Beard classic.', note:'Perfect lunch stop on the High Road, day 5.'},
+   {n:'Orlando\u2019s, Taos', u:'https://www.orlandosnmcafe.com',
+    x:'Blue corn enchiladas, Christmas-style.', note:'Closed Sundays. Sit at the counter to skip the wait.'},
+   {n:'Doc Martin\u2019s at the Taos Inn', u:'https://taosinn.com',
+    x:'New Mexican done up, with live jazz.', note:'The Adobe Bar next door is called Taos\u2019s living room.'},
+   {n:'Artesian at Ojo Caliente', u:'https://ojosparesorts.com/ojo-caliente/',
+    x:'Farm-to-table with a wine bar.', note:'The only real option out there \u2014 and it is good.'}
+  ],
+  dontmiss:[
+   'Say <b>\u201cChristmas\u201d</b> when asked red or green. It gets you both, and it is the correct answer.',
+   '<b>Sopaipillas with honey</b> \u2014 puffed fried bread that comes with most plates. Tear a corner, pour the honey in. Non-negotiable.',
+   '<b>Biscochitos</b> \u2014 the state cookie. Anise, cinnamon, made with lard.',
+   'The <b>Chimay\u00f3 cocktail</b> \u2014 tequila, Velarde apple cider, cr\u00e8me de cassis, lemon. Invented at Rancho de Chimay\u00f3 in 1965. In October the cider is fresh-pressed, which is the whole point.',
+   '<b>Pi\u00f1on pancakes at Tecolote Cafe</b>, Santa Fe. Forty years in, and they famously do not serve toast.',
+   '<b>Frito pie at the Five &amp; Dime</b> on the Plaza \u2014 chile and cheese ladled into a split bag of Fritos. Kitsch, but it is the original.',
+   '<b>Kakawa Chocolate House</b>, Santa Fe \u2014 drinking chocolate elixirs made to pre-Columbian recipes. Order the 1600s Aztec.',
+   '<b>Green chile cheeseburger</b> \u2014 Bode\u2019s in Abiqui\u00fa is on your day-4 route; Horseman\u2019s Haven in Santa Fe for the hot version.',
+   '<b>Chokol\u00e1</b> in Taos, and <b>Michael\u2019s Kitchen</b> for a donut before the Enchanted Circle drive.',
+   '<b>San Francisco de Asis Church</b> in Ranchos de Taos \u2014 the buttressed adobe both O\u2019Keeffe and Ansel Adams photographed. Five minutes off your route.',
+   'The <b>mud pool at Ojo Caliente</b>. Coat yourself, dry in the sun, rinse. Included.',
+   '<b>Chile ristras</b> hang everywhere in October. Buy one \u2014 they ship.',
+   'The <b>Ghost Ranch Wednesday combined tour</b> \u2014 O\u2019Keeffe\u2019s Abiqui\u00fa home plus the landscape, $124, museum admission included, caps at twelve, sells out two months out. Build around a Wednesday and it replaces three line items.'
+  ],
+  costs:[
+   {n:'Per person \u2014 flight, admissions, food at ~$70/day', v:'$997'},
+   {n:'Per car \u2014 rental, fuel, park entry', v:'$515'},
+   {n:'Per room \u2014 5 nights', v:'$1,095'},
+   {n:'Total, travelling solo', v:'~$2,607'}
   ],
   tips:[
-   'Balloon Fiesta in Albuquerque runs Oct 2–10, 2027. Adding it costs about $600 and three days. Worth it once.',
+   'Balloon Fiesta in Albuquerque runs Oct 2\u201310, 2027. Adding it costs about $600 and three days. Worth it once.',
    'Elevation is real. Drink twice what you think you need for the first 48 hours.',
-   'The full 13-day version — Roswell, White Sands, Silver City, the hot springs at Truth or Consequences — is a separate trip. Don\'t bolt it on.',
-   '65–75°F days, 35–45°F nights in October. A real jacket, not a fleece.'
+   'The full 13-day version \u2014 Roswell, White Sands, Silver City, Truth or Consequences \u2014 is a separate trip. Do not bolt it on.',
+   '65\u201375\u00b0F days, 35\u201345\u00b0F nights in October. A real jacket, not a fleece.',
+   'Taos Pueblo is $25 for adults and $22 at 62 and over.'
   ],
   links:[
    {l:'New Mexico Tourism',u:'https://www.newmexico.org'},
    {l:'Bandelier National Monument',u:'https://www.nps.gov/band'},
-   {l:'Taos Pueblo',u:'https://taospueblo.com'},
+   {l:'Taos Pueblo',u:'https://taospueblo.com/rates/'},
    {l:'Ghost Ranch',u:'https://www.ghostranch.org'},
+   {l:'O\u2019Keeffe Museum',u:'https://www.okeeffemuseum.org'},
+   {l:'Ojo Caliente',u:'https://ojosparesorts.com/ojo-caliente/'},
    {l:'Balloon Fiesta',u:'https://www.balloonfiesta.com'}
   ]
 },
@@ -882,114 +950,9 @@ function changeUrl(){
   CFG.url=url.trim(); saveCfg(); pull();
 }
 
-/* ---------- horizon art ---------- */
+/* ---------- chapter band ---------- */
 function horizon(kind,c){
-  const far=`fill="${c}" opacity=".16"`, mid=`fill="${c}" opacity=".34"`,
-        near=`fill="${c}" opacity=".62"`, ink=`fill="${c}" opacity=".88"`;
-  const sun=(x,y,r,o)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${o}"/>`;
-  const birds=(x,y,sc)=>`<g fill="none" stroke="${c}" stroke-width="${1.5*sc}"
-     stroke-linecap="round" opacity=".5">
-     <path d="M${x} ${y} q${5*sc} ${-4.5*sc} ${10*sc} 0 q${5*sc} ${-4.5*sc} ${10*sc} 0"/>
-     <path d="M${x+26*sc} ${y+9*sc} q${4*sc} ${-3.6*sc} ${8*sc} 0 q${4*sc} ${-3.6*sc} ${8*sc} 0"/></g>`;
-
-  const shapes={
-    mesa:
-      sun(455,44,26,.20)+
-      `<path d="M0 170V104q54-4 86-4l22-19h96l20 19q58 3 96 1V170Z" ${far}/>
-       <path d="M300 170v-52q46-3 74-3l18-15h82l17 15q56 3 109 0V170Z" ${far}/>
-       <path d="M0 170v-40q70-6 118-2l26-18h104l24 18q66 5 128 1t100-5V170Z" ${mid}/>
-       <path d="M0 170v-22q120-12 250-6t350-2V170Z" ${near}/>
-       <path d="M92 148q10-26 20 0Z" ${ink}/><path d="M470 152q12-30 24 0Z" ${ink}/>
-       <path d="M118 150v-16m-6 7h12" stroke="${c}" stroke-width="2" opacity=".7" fill="none"/>`
-      +birds(70,40,1),
-    cliffs:
-      sun(120,40,22,.18)+
-      `<path d="M0 170V72l40-34 38 40 44-48 40 52 46-42 44 50 50-46 48 54 52-44 48 50 56-40 44 44V170Z" ${far}/>
-       <path d="M0 170V104l52-40 44 46 52-38 48 52 56-42 52 50 60-44 52 48 56-36 48 40V170Z" ${mid}/>
-       <path d="M0 170v-38q80-22 152 2t150 6 152-24 146 14V170Z" ${near}/>
-       <path d="M0 170v-14q150 10 300 2t300 4V170Z" ${ink}/>`
-      +birds(432,46,1.1),
-    islands:
-      sun(500,40,24,.20)+
-      `<path d="M0 170v-54q60-30 122-4 22 10 44 2l36 56Z" ${far}/>
-       <path d="M250 170q58-52 122-22 24 12 50 2l30 20Z" ${mid}/>
-       <path d="M430 170q64-34 120-14 28 10 50 2V170Z" ${far}/>
-       <path d="M0 170v-26q150 16 300 4t300 10V170Z" ${near}/>
-       <path d="M292 142V64h4v78Z" ${ink}/>
-       <path d="M296 68q44 12 0 32Z" ${ink}/>
-       <path d="M262 144q34-10 68 0Z" ${ink}/>
-       <path d="M0 170v-10q150 8 300 0t300 6V170Z" ${ink}/>`,
-    hills:
-      sun(440,46,25,.20)+
-      `<path d="M0 170v-72q92-46 186-14 96 32 184-16 92-50 230-4V170Z" ${far}/>
-       <path d="M0 170v-48q104-42 210-10 100 30 196-12 88-38 194-2V170Z" ${mid}/>
-       <path d="M0 170v-26q120-30 246 0t354-4V170Z" ${near}/>
-       <rect x="250" y="86" width="34" height="34" ${ink}/>
-       <rect x="296" y="98" width="20" height="22" ${near}/>
-       <path d="M0 170v-10q150 8 300 0t300 6V170Z" ${ink}/>`
-      +birds(90,44,1),
-    swamp:
-      sun(330,46,28,.16)+
-      `<path d="M0 170v-52q150 10 300 2t300 8V170Z" ${far}/>` +
-      [46,118,196,282,356,436,516,574].map((x,i)=>{
-        const h=58+((i*31)%40), w=5+((i%3)*2);
-        return `<path d="M${x} 150 q${-w} -${h*0.6} ${-w*0.4} -${h} q${w*1.5} ${h*0.3} ${w*0.4} ${h}Z"
-                 fill="${c}" opacity="${0.3+(i%3)*0.2}"/>
-                <path d="M${x-18} ${150-h*0.72} q18-14 36 0 q-18-6-36 0Z" fill="${c}" opacity="${0.22+(i%3)*0.16}"/>`;
-      }).join('')+
-      `<path d="M0 170v-28q150 8 300 0t300 6V170Z" ${near}/>
-       <path d="M0 170v-12q150 10 300 2t300 6V170Z" ${ink}/>`,
-    marsh:
-      sun(140,46,26,.20)+
-      `<path d="M0 170v-58q150 8 300 0t300 6V170Z" ${far}/>` +
-      Array.from({length:58},(_,i)=>{const x=i*10.4+4,h=26+((i*37)%34);
-        return `<path d="M${x} 152 q${(i%2?2:-2)} -${h*0.55} ${(i%2?3:-3)} -${h}"
-                 stroke="${c}" stroke-width="1.5" fill="none" opacity="${0.35+((i%4)*0.15)}"/>`}).join('')+
-      `<path d="M0 170v-22q150 8 300 0t300 6V170Z" ${near}/>
-       <path d="M0 170v-10q150 8 300 0t300 6V170Z" ${ink}/>`
-      +birds(420,44,1.1),
-    forest:
-      sun(80,44,24,.18)+
-      Array.from({length:34},(_,i)=>{const x=i*18+4,h=44+((i*53)%52);
-        return `<path d="M${x} 154 L${x+7} ${154-h} L${x+14} 154Z" fill="${c}" opacity="${0.16+((i%5)*0.13)}"/>`}).join('')+
-      Array.from({length:18},(_,i)=>{const x=i*34+10,h=64+((i*41)%46);
-        return `<path d="M${x} 158 L${x+11} ${158-h} L${x+22} 158Z" fill="${c}" opacity="${0.45+((i%3)*0.16)}"/>`}).join('')+
-      `<path d="M0 170v-16q150 8 300 0t300 6V170Z" ${ink}/>`,
-    volcano:
-      sun(480,42,24,.18)+
-      `<path d="M0 170v-44q120-6 190-6l70-58h28l72 58q118 4 240 2V170Z" ${far}/>
-       <path d="M0 170v-28q140-10 220-8l58-44h20l60 44q124 6 242 0V170Z" ${mid}/>
-       <path d="M268 62q22-14 44 0-22 10-44 0Z" ${ink}/>
-       <path d="M276 56q6-20 12-4 6-20 12 2" stroke="${c}" stroke-width="2.4" fill="none" opacity=".7"/>
-       <path d="M0 170v-16q150 8 300 0t300 6V170Z" ${near}/>
-       <path d="M0 170v-7q150 6 300 0t300 4V170Z" ${ink}/>`,
-    meseta:
-      sun(110,42,27,.20)+
-      `<path d="M0 170v-70q150-14 300-4t300-8V170Z" ${far}/>
-       <path d="M0 170v-46q150-12 300 0t300-6V170Z" ${mid}/>` +
-      Array.from({length:48},(_,i)=>{const x=i*12.6+5,h=10+((i*29)%12);
-        return `<path d="M${x} 148 l${(i%2?1.5:-1.5)} -${h}" stroke="${c}" stroke-width="1.4" opacity=".55" fill="none"/>`}).join('')+
-      `<path d="M436 148V78h18v70Z" ${ink}/>
-       <path d="M428 78 L445 54 L462 78Z" ${ink}/>
-       <path d="M445 48v12m-6-6h12" stroke="${c}" stroke-width="2.4" fill="none" opacity=".85"/>
-       <path d="M0 170v-20q150 8 300 0t300 6V170Z" ${near}/>
-       <path d="M0 170v-9q150 6 300 0t300 4V170Z" ${ink}/>`
-      +birds(520,44,1),
-    aegean:
-      sun(96,44,26,.22)+
-      `<path d="M0 170v-46q150 8 300 0t300 6V170Z" ${far}/>` +
-      [40,72,108,148,186,228,264,306,348,388,424,464,502,540,574].map((x,i)=>{
-        const h=22+((i*23)%22), w=18+((i*11)%10), y=126-h;
-        return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" opacity="${0.26+((i%4)*0.14)}"/>`}).join('')+
-      `<path d="M258 104q22-24 44 0Z" ${ink}/>
-       <rect x="277" y="66" width="4" height="20" ${ink}/>
-       <path d="M269 74h20" stroke="${c}" stroke-width="3" opacity=".88"/>
-       <path d="M0 170v-30q60-12 120 0t120 0 120 0 120 0 120 0V170Z" ${mid}/>
-       <path d="M0 170v-16q60-10 120 0t120 0 120 0 120 0 120 0V170Z" ${near}/>`
-      +birds(440,42,1)
-  };
-  return `<svg class="horizon" viewBox="0 0 600 170" preserveAspectRatio="xMidYMax slice"
-    aria-hidden="true">${shapes[kind]||shapes.hills}</svg>`;
+  return `<div class="band-art" style="--a:${c};--t:${tint_(c,.24)}"></div>`;
 }
 
 /* ---------- signpost ---------- */
@@ -1086,12 +1049,31 @@ function open(id){
 
   <div class="sec"><h3>Day by day</h3>
     <ol class="itin">${p.itin.map(i=>`<li><span class="d">${i.d}</span>
-      <span><span class="t">${i.t}</span><span class="x">${i.x}</span></span></li>`).join('')}</ol>
+      <span><span class="t">${i.t}</span><span class="x">${i.x}</span>
+      ${i.cost?`<span class="cost">${i.cost}</span>`:''}</span></li>`).join('')}</ol>
   </div>
 
   <div class="sec"><h3>Where to sleep</h3>
-    <ul class="stays">${p.stay.map(s=>`<li><b>${s.n}</b><br>${s.x}</li>`).join('')}</ul>
+    <p class="note">Rates are per room, not per person.</p>
+    <ul class="stays">${p.stay.map(s=>`<li>
+      <b>${s.u?`<a href="${s.u}" target="_blank" rel="noopener">${s.n}</a>`:s.n}</b>
+      ${s.rate?`<span class="rate">${s.rate}</span>`:''}
+      <br>${s.x}</li>`).join('')}</ul>
   </div>
+
+  ${p.eat?`<div class="sec"><h3>Where to eat</h3>
+    <ul class="stays">${p.eat.map(e=>`<li>
+      <b>${e.u?`<a href="${e.u}" target="_blank" rel="noopener">${e.n}</a>`:e.n}</b>
+      <br>${e.x}${e.note?` <span class="quiet">${e.note}</span>`:''}</li>`).join('')}</ul>
+  </div>`:''}
+
+  ${p.dontmiss?`<div class="sec"><h3>Don't miss</h3>
+    <ul class="tips">${p.dontmiss.map(d=>`<li>${d}</li>`).join('')}</ul>
+  </div>`:''}
+
+  ${p.costs?`<div class="sec"><h3>What it costs</h3>
+    <ul class="stays">${p.costs.map(c=>`<li><b>${c.n}</b><span class="rate">${c.v}</span></li>`).join('')}</ul>
+  </div>`:''}
 
   <div class="sec"><h3>Worth knowing</h3>
     <ul class="tips">${p.tips.map(t=>`<li>${t}</li>`).join('')}</ul>
