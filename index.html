@@ -840,191 +840,113 @@ const PLACES = [
   ]
 },
 {
-  id:'greece', moment:'Whitewash, bougainvillea, and the sea a color you will not believe until you see it.', scope:'world', name:'The Greek Islands', tag:'Seven nights in the Aegean with Isa and Camila',
+  id:'greece', scope:'world', moment:'Whitewash, bougainvillea, and the sea a colour you will not believe until you see it.',
+  name:'The Greek Islands', tag:'Seven nights in the Aegean with Isa and Camila',
   accent:'#5AA7AC', horizon:'aegean', art:'img/greece.jpg',
-  region:'Athens · Cyclades · Dodecanese',
-  days:'11 days', budget:'$3,400 each', when:'September',
-  why:'This one is already half-decided — a 7-night Celestyal sailing in September, with Isa and Camila. September is the right call: the sea is at its warmest after a summer of heating, the crowds thin after the August peak, and the light goes long and gold. The cruise solves the hard part of Greek island travel, which is that ferries between islands eat entire days. You wake up somewhere new each morning without repacking. Bookend it with Athens on both sides so the trip has land under it — the Acropolis is not a port excursion.',
+  region:'Athens \u00b7 Cyclades \u00b7 Ephesus',
+  days:'11 days', budget:'$3,400 each', when:'Late May 2027',
+  why:'This one is already half-decided \u2014 Celestyal\u2019s Idyllic Aegean, seven nights round-trip from Piraeus, with Isa and Camila. The cruise solves the hard part of Greek island travel, which is that ferries between islands eat whole days; you wake up somewhere new each morning without repacking. Late May is the better trip on every measure except one: the water is cooler than July, but the islands are still green, the crowds have not arrived and the fares drop noticeably. The one risk is softball. College season runs through May, and if Earlham goes deep into conference tournaments, late May disappears. Decide in autumn 2026 once you see the spring schedule; the fallback is the free week of 4 July, which costs no vacation days and is the week everyone is reliably free.',
   itin:[
-   {d:'1',t:'Fly to Athens',x:'Overnight from the US, arrive afternoon. Hotel in Plaka or Monastiraki. Rooftop dinner with the Acropolis lit up.'},
-   {d:'2',t:'Athens',x:'Acropolis at opening before the heat, then the Acropolis Museum. Afternoon in the Plaka and the Central Market. Slow evening.'},
-   {d:'3',t:'Board',x:'Transfer to the port, board Celestyal, sail in the evening. Dinner at sea.'},
-   {d:'4',t:'Aegean ports',x:'The classic Celestyal week runs Mykonos, Kuşadası for Ephesus, Patmos, Crete, Santorini and Milos in some order. Confirm your exact sailing.'},
-   {d:'5',t:'Santorini',x:'The one everyone comes for. Cable car up to Fira, bus to Oia, and the caldera at sunset. Book any excursion early — tender days get congested.'},
-   {d:'6',t:'Ephesus from Kuşadası',x:'One of the best-preserved classical cities anywhere. The library facade, the theater, marble streets. Go with a guide.'},
-   {d:'7',t:'Mykonos',x:'Windmills, Little Venice, the whitewashed maze. The girls will love it. Go ashore early and stay through dinner.'},
-   {d:'8',t:'Crete or Milos',x:'Crete for Knossos and Minoan history; Milos for Sarakiniko, which looks like a moonscape dropped into turquoise water.'},
-   {d:'9',t:'Back to Athens',x:'Disembark morning. Check back into the city.'},
-   {d:'10',t:'Cape Sounion',x:'Half-day out to the Temple of Poseidon on the cliff. Sunset there is the right last image of Greece.'},
-   {d:'11',t:'Fly home',x:'Morning departure from Athens.'}
+   {d:'1',t:'Overnight to Athens',
+    x:'No direct flights from Indianapolis \u2014 one stop, usually through a European hub. You lose a day in the air and land mid-afternoon. Do nothing ambitious tonight; find a rooftop and eat with the Acropolis lit up in front of you.',
+    cost:'Flights ~$1,100 pp'},
+   {d:'2',t:'The Acropolis, early',
+    x:'Be at the gate when it opens. By eleven the marble is crowded and hot, and the queue in May is already long. Then the Acropolis Museum, which is air-conditioned and holds everything taken off the hill \u2014 go in that order or the ruins won\u2019t mean as much.',
+    cost:'~\u20ac30 pp'},
+   {d:'3',t:'Plaka, the market, then board',
+    x:'Morning in the Plaka lanes and the Varvakeios central market. Transfer to Piraeus in the afternoon and sail at five. Dinner is on board.',
+    cost:'Transfer ~\u20ac60 per car'},
+   {d:'4',t:'Thessaloniki',
+    x:'Greece\u2019s second city and its best eating \u2014 Byzantine walls, the waterfront, a food culture shaped by refugees from Asia Minor. Most cruisers skip it. Don\u2019t.',
+    cost:'Free on foot'},
+   {d:'5',t:'Ku\u015fadas\u0131 for Ephesus',
+    x:'One of the best-preserved classical cities anywhere: the Library of Celsus, the great theatre, marble streets you actually walk down. Take the guided excursion \u2014 unguided, it is just handsome rubble.',
+    cost:'Excursion ~\u20ac60 pp'},
+   {d:'6',t:'Crete \u2014 Heraklion and Knossos',
+    x:'The Minoan palace, four thousand years old, and the archaeological museum in town that holds the frescoes. Europe\u2019s oldest civilisation, and a good counterweight to all the whitewash.',
+    cost:'Excursion ~\u20ac65 pp'},
+   {d:'7',t:'Santorini',
+    x:'The one everyone comes for, and it earns it. Cable car up to Fira, bus along the caldera rim to Oia. A tender port, so book the ship excursion rather than going independently unless you like queuing. Stay for sunset \u2014 the ship overnights here.',
+    cost:'Excursion ~\u20ac70 pp'},
+   {d:'8',t:'Mykonos and Milos',
+    x:'Mykonos for the windmills, Little Venice and the whitewashed maze \u2014 the girls will love it. Milos for Sarakiniko, a white volcanic moonscape dropped into turquoise water, and the best swimming of the week.',
+    cost:'Free ashore'},
+   {d:'9',t:'Back to Athens',
+    x:'Disembark in the morning and check back into the city. Afternoon in the National Archaeological Museum, or just sit somewhere with a coffee and no schedule.',
+    cost:'\u2014'},
+   {d:'10',t:'Cape Sounion',
+    x:'Half a day out along the coast to the Temple of Poseidon on its cliff. Sunset there is the right last image of Greece, and the drive down is beautiful.',
+    cost:'Tour ~\u20ac45 pp'},
+   {d:'11',t:'Fly home',
+    x:'Morning departure. Another long day, another stop.',
+    cost:'\u2014'}
   ],
   stay:[
-   {n:'Celestyal, 7 nights',x:'Balcony cabin for three is tight — consider two cabins or a triple with a window. €900–1,500 per person depending on category.'},
-   {n:'Electra Metropolis, Athens',x:'Rooftop pool looking at the Acropolis. ~€220/night.'},
-   {n:'Hotel Grande Bretagne',x:'The grand one on Syntagma if you want to spend it somewhere. ~€400.'},
-   {n:'AthensWas or Herodion',x:'Right under the Acropolis, walkable to everything. ~€180.'}
+   {n:'Celestyal Journey, 7 nights', u:'https://celestyal.com/us/our-cruises/idyllic-greece', rate:'$900\u20131,400 pp',
+    x:'Fares include all meals, select drinks, port taxes and entertainment. A balcony cabin for three is tight \u2014 price two cabins against one triple before deciding. Late May sits below the July and September peaks.'},
+   {n:'Electra Metropolis, Athens', u:'https://www.electrahotels.gr', rate:'~\u20ac280',
+    x:'Syntagma, rooftop pool and restaurant facing the Acropolis, breakfast served ten floors up with the view. Central enough to walk everywhere.'},
+   {n:'Electra Palace, Athens', u:'https://www.electrahotels.gr/hotels/electra-palace-athens/', rate:'~\u20ac320',
+    x:'The Plaka sister property \u2014 closer to the old lanes, seasonal rooftop pool with what many call the best Acropolis view in the city.'},
+   {n:'Plaka Hotel', u:'https://www.plakahotel.gr', rate:'~\u20ac180',
+    x:'The sensible mid-range choice. Rooftop terrace with a wide, direct view of the rock, and you are in the middle of everything. Half the price of the Electras.'}
+  ],
+  eat:[
+   {n:'Klimataria, Athens', u:'https://klimataria.gr',
+    x:'A hundred-year-old taverna with sandstone walls and wine barrels. Slow-cooked lamb, house wine from the barrel, and a resident band playing rebetiko.', note:'Book ahead. Go for a music night \u2014 it is the point.'},
+   {n:'Ta Karamanlidika tou Fani', u:'https://www.karamanlidika.gr',
+    x:'Deli and mezedopoleio in one. Pastirma, soutzouki, aged cheeses \u2014 the food of the Karamanli Greeks of Cappadocia.', note:'Order the cured meat and cheese board and build from there.'},
+   {n:'Diporto, Athens', u:'https://www.athenstourism.org/athens-food-guide/',
+    x:'An unmarked cellar by the central market with no menu and about five dishes. Chickpeas, sardines, barrel wine.', note:'Lunch only, closes around 6pm. Cash.'},
+   {n:'Strofi, Athens', u:'https://strofi.gr',
+    x:'Refined Greek cooking with a rooftop terrace looking straight at the floodlit Parthenon.', note:'The one splurge dinner. Reserve the terrace.'},
+   {n:'To Kafeneio, Plaka', u:'https://www.athenstourism.org/athens-food-guide/best-restaurants-plaka-monastiraki-athens/',
+    x:'Running since 1935. Classic taverna plates in the old lanes.', note:'Early dinner walks in; after 9pm it fills.'},
+   {n:'O Thanasis, Monastiraki', u:'https://www.othanasis.com',
+    x:'Kebab and souvlaki, fast and cheap, right on the square.', note:'Lunch between sights. A few euros each.'},
+   {n:'Lukumades, Aiolou St', u:'https://lukumades.com',
+    x:'Loukoumades \u2014 hot honey doughnuts, the oldest recorded dessert in Europe.', note:'Take them to the steps and eat them warm.'}
+  ],
+  dontmiss:[
+   'Order the <b>house wine from the barrel</b> in a taverna \u2014 served in a copper pitcher, costs almost nothing, and is what Greeks actually drink.',
+   '<b>Loukoumades</b> \u2014 honey doughnuts with cinnamon and walnut. Get them hot or not at all.',
+   '<b>Greek coffee</b>, made in a briki and served with a glass of water. Ask for <i>metrios</i> unless you want it sweet. Do not drink the last inch.',
+   '<b>Frapp\u00e9</b> in the afternoon \u2014 shaken instant coffee over ice, invented in Thessaloniki in 1957 and still the national drink of a Greek summer.',
+   '<b>Bougatsa for breakfast</b> in Thessaloniki \u2014 semolina custard in filo, dusted with sugar. The city\u2019s signature.',
+   '<b>Fava from Santorini</b> \u2014 yellow split peas whipped with lemon and oil, grown in volcanic ash. Different from anything of the same name elsewhere.',
+   '<b>Santorini\u2019s Assyrtiko wine</b> \u2014 vines coiled into baskets on the ground to survive the wind. Bone dry, mineral, unlike any other white.',
+   '<b>Tomatokeftedes</b> \u2014 Santorini tomato fritters. A tiny, intense island tomato that grows without rain.',
+   '<b>Loukoumi and mastiha</b> \u2014 Turkish delight and the resin liqueur from Chios. Both travel home well.',
+   '<b>Sarakiniko on Milos</b> \u2014 white volcanic rock worn smooth into a moonscape. The best swim of the week, and the best photograph.',
+   '<b>Oia at sunset</b>, but walk fifteen minutes past the crowd first \u2014 the view is the same and you can hear yourself.',
+   'The <b>Acropolis Museum\u2019s glass floor</b>, with the excavated ancient city visible under your feet.',
+   '<b>Say "Christmas" has no equivalent here</b> \u2014 but do learn <i>yamas</i> for a toast and <i>efharist\u00f3</i> for thank you. Both get used twenty times a day.'
+  ],
+  costs:[
+   {n:'Cruise, 7 nights \u2014 per person, double occupancy', v:'$900\u20131,400'},
+   {n:'Flights from Indianapolis \u2014 per person', v:'~$1,100'},
+   {n:'Athens hotels, 4 nights \u2014 per room', v:'~\u20ac900'},
+   {n:'Excursions and entries \u2014 per person', v:'~\u20ac270'},
+   {n:'Food ashore, transfers, incidentals \u2014 per person', v:'~\u20ac400'},
+   {n:'Total, per person sharing a room', v:'~$3,400'}
   ],
   tips:[
-   'Book the cruise 9–12 months out for September — it is the most requested month and the good cabins go.',
-   'Check what Celestyal includes. Their fares often bundle several shore excursions and drinks, which changes the real comparison against other lines.',
-   'Two nights in Athens before and two after. Do not try to see the Acropolis on a cruise turnaround day.',
-   'Passports need 6 months validity beyond the return date. Check all three well ahead.',
-   'Santorini is a tender port. If mobility or timing matters, book the ship excursion rather than going independently.',
-   'September water is around 77°F — warmer than June. Pack for swimming.'
+   'Book 9\u201312 months out. Late May is quieter than July and September but the good cabin categories still go early.',
+   'Check what the fare includes \u2014 Celestyal bundles meals, select drinks and port taxes, which changes the real comparison against other lines.',
+   'Two nights in Athens before and two after. Do not try to see the Acropolis on a turnaround day.',
+   'Passports need six months\u2019 validity beyond the return date. Check all three well ahead.',
+   'Santorini and Mykonos are tender ports. Wind can cancel a tender call outright \u2014 it happens, and the ship substitutes another island.',
+   'Late May water is around 68\u201370\u00b0F. Swimmable, but cooler than the July version of this trip.',
+   'Decide in autumn 2026 once Isa\u2019s spring softball schedule is known. The free week of 4 July is the fallback.'
   ],
   links:[
-   {l:'Celestyal Cruises',u:'https://www.celestyal.com'},
+   {l:'Celestyal \u2014 Idyllic Greece',u:'https://celestyal.com/us/our-cruises/idyllic-greece'},
    {l:'Visit Greece',u:'https://www.visitgreece.gr'},
    {l:'Acropolis tickets',u:'https://hhticket.gr'},
-   {l:'Ephesus',u:'https://whc.unesco.org/en/list/1018/'}
+   {l:'Acropolis Museum',u:'https://www.theacropolismuseum.gr'},
+   {l:'Ephesus \u2014 UNESCO',u:'https://whc.unesco.org/en/list/1018/'}
   ]
 }
-];
-
-
-/* ---------- colour helpers: readable text on any accent ---------- */
-function rgb_(h){return [1,3,5].map(i=>parseInt(h.substr(i,2),16));}
-function lum_(h){const c=rgb_(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
-  return .2126*c[0]+.7152*c[1]+.0722*c[2];}
-function ratio_(a,b){const [x,y]=[lum_(a),lum_(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05);}
-function hex_(r,g,b){return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v)))
-  .toString(16).padStart(2,'0')).join('');}
-/* cream or ink, whichever reads better on this sign */
-function tint_(bg,amt){const a=rgb_(bg),b=rgb_('#FAF9F6');
-  return hex_(a[0]*amt+b[0]*(1-amt), a[1]*amt+b[1]*(1-amt), a[2]*amt+b[2]*(1-amt));}
-/* a darker cousin of the accent, for text on the sand background */
-function inkAccent(bg){
-  let [r,g,b]=rgb_(bg), out=bg, n=0;
-  while(ratio_(out,'#FAF9F6') < 4.5 && n++ < 14){ r*=.88; g*=.88; b*=.88; out=hex_(r,g,b); }
-  return out;
-}
-
-/* ---------- little drawn marks ---------- */
-const GLYPH={
- 'Dreaming':'<path d="M4 13.5a3 3 0 0 1 .6-5.9A4.2 4.2 0 0 1 12.6 6 3.3 3.3 0 0 1 16 13.5Z"/>',
- 'Shortlisted':'<path d="M9 2.6 11 7l4.8.5-3.6 3.2 1 4.7L9 13l-4.2 2.4 1-4.7L2.2 7.5 7 7Z"/>',
- 'Booked':'<path d="M9 2.3 3.4 8.6c-1 1.2-.3 3 1.2 3.2l2.5.4.4 2.5c.2 1.5 2 2.2 3.2 1.2L17 10"/><path d="M9 2.3 17 10"/>',
- 'Been there':'<path d="M2.6 9.4 6.9 13.6 15.4 4.2"/>'
-};
-function glyph(status){
-  const fill = status==='Shortlisted'||status==='Booked' ? 'currentColor' : 'none';
-  return '<svg viewBox="0 0 18 18" fill="'+fill+'" stroke="currentColor" stroke-width="1.5" '+
-         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+GLYPH[status]+'</svg>';
-}
-const GICON={
- us:'<svg class="gi" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.4"/><path d="M13 7 11 11.2 6.8 13.2 8.8 9Z"/></svg>',
- world:'<svg class="gi" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.4q2.4-2 4.8 0t4.8 0 4.4-.6"/><path d="M10 13.6V4.2l5 5.2-5 1.6"/><path d="M6.6 13.2 10 6"/></svg>'
-};
-
-const STATUSES=['Dreaming','Shortlisted','Booked','Been there'];
-
-/* ---------- storage + sync ---------- */
-const SYNC_URL='https://script.google.com/macros/s/AKfycbwiIu1jcKr5fTzBK4ptzdYd0Jk44K_B2QjPt3qQwFpZgVQyPTLW8TwXvw8DdtHnpLl_8A/exec';
-const KEY='wtn.v1', CFGKEY='wtn.cfg';
-let DB={}, CFG={url:SYNC_URL,code:''};
-try{ DB=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ DB={}; }
-try{ CFG=Object.assign(CFG,JSON.parse(localStorage.getItem(CFGKEY)||'{}')); }catch(e){}
-if(!CFG.url) CFG.url=SYNC_URL;
-
-function saveLocal(){
-  try{ localStorage.setItem(KEY,JSON.stringify(DB)); return true; }catch(e){ return false; }
-}
-function saveCfg(){
-  try{ localStorage.setItem(CFGKEY,JSON.stringify(CFG)); }catch(e){}
-}
-function rec(id){
-  if(!DB[id]) DB[id]={status:'Dreaming',notes:'',imgs:[],updated:0};
-  if(DB[id].updated===undefined) DB[id].updated=0;
-  return DB[id];
-}
-function touch(id){ rec(id).updated=Date.now(); }
-
-/* save() keeps the old name so every caller still works */
-function save(){ const ok=saveLocal(); queuePush(); return ok; }
-
-const syncEl=document.getElementById('syncstate');
-function syncMsg(t,tone){
-  if(!syncEl) return;
-  syncEl.textContent=t;
-  syncEl.className='syncstate'+(tone?' '+tone:'');
-}
-
-function linked(){ return !!(CFG.url && CFG.code); }
-
-async function call(action,payload){
-  const res=await fetch(CFG.url,{
-    method:'POST',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({action,code:CFG.code,data:payload||{}})
-  });
-  const j=await res.json();
-  if(!j.ok) throw new Error(j.error||'Sync refused the request.');
-  return j.data;
-}
-
-function merge(remote){
-  Object.keys(remote).forEach(id=>{
-    const r=remote[id], mine=DB[id];
-    if(!mine || (r.updated||0) > (mine.updated||0)) DB[id]=r;
-  });
-  saveLocal();
-}
-
-async function pull(quiet){
-  if(!linked()) return;
-  if(!quiet) syncMsg('Checking for changes…');
-  try{
-    merge(await call('pull'));
-    renderPost();
-    syncMsg('Up to date','good');
-  }catch(e){ syncMsg('Offline — saved on this device','warn'); }
-}
-
-let pushTimer;
-function queuePush(){
-  if(!linked()) return;
-  clearTimeout(pushTimer);
-  syncMsg('Saving…');
-  pushTimer=setTimeout(async()=>{
-    try{
-      merge(await call('push',DB));
-      syncMsg('Synced','good');
-    }catch(e){ syncMsg('Offline — saved on this device','warn'); }
-  },1200);
-}
-
-/* ---------- setup ---------- */
-function setup(){
-  const code=prompt('Enter your access code (LIL, ISA or CAM):',CFG.code||'');
-  if(code===null) return;
-  CFG.code=code.trim().toUpperCase();
-  saveCfg();
-  if(linked()){ syncMsg('Connecting…'); pull(); }
-  else syncMsg('Not syncing yet','warn');
-}
-function changeUrl(){
-  const url=prompt('Apps Script web app URL (ends in /exec):',CFG.url||'');
-  if(url===null) return;
-  CFG.url=url.trim(); saveCfg(); pull();
-}
-
-/* ---------- chapter band ---------- */
-function horizon(p){
-  if(p.art) return `<img class="band-img" src="${p.art}" alt="" loading="lazy"
-    style="--a:${p.accent}" onerror="this.outerHTML=bandFallback('${p.accent}')">`;
-  return bandFallback(p.accent);
-}
-function bandFallback(c){
-  return `<div class="band-art" style="--a:${c};--t:${tint_(c,.24)}"></div>`;
-}
-
-/* ---------- signpost ---------- */
-const postsEl=document.getElementById('posts');
-let filter='All';
-
-const GROUPS=[
-  {scope:'us',label:'Around this country'},
-  {scope:'world',label:'Worth the passport'}
 ];
 
 function signFor(p){
