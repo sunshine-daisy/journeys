@@ -263,6 +263,8 @@ textarea{
 .emptystate svg{width:54px;height:54px;color:var(--ink-3);margin-bottom:.6rem}
 
 /* ---------- atmosphere ---------- */
+.band-img{display:block;width:100%;margin-top:1.5rem;height:auto;max-height:270px;
+  object-fit:cover;object-position:center bottom;border-bottom:5px solid var(--a)}
 .band-art{margin-top:1.6rem;height:58px;background:var(--t);position:relative}
 .band-art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;background:var(--a)}
 .hero{padding:2.6rem 0 0}
@@ -352,7 +354,7 @@ const PLACES = [
 {
   id:'nm', moment:'Woodsmoke and roasting chile, and a sky so clear the mountains look closer than they are.',
   name:'Northern New Mexico', tag:'High desert, adobe, thin bright air',
-  accent:'#C1663A', horizon:'mesa',
+  accent:'#C1663A', horizon:'mesa', art:'img/nm.jpg',
   region:'Santa Fe \u00b7 Taos \u00b7 Abiqui\u00fa',
   days:'6 days', budget:'$2,607', when:'Late Sept \u2013 mid Oct',
   why:'This is the restful version of New Mexico \u2014 the northern Rio Grande only, no southern loop, about a third of the driving. You sleep in three places across six days instead of six. Santa Fe and Taos are four-hundred-year-old towns built of mud and timber, where the light does something to colour that photographs cannot quite hold. Taos Pueblo has been continuously inhabited for a thousand years. The food is its own cuisine, not a regional variation of anything else. And at seven thousand feet the air is so clear that distance stops reading correctly.',
@@ -951,7 +953,12 @@ function changeUrl(){
 }
 
 /* ---------- chapter band ---------- */
-function horizon(kind,c){
+function horizon(p){
+  if(p.art) return `<img class="band-img" src="${p.art}" alt="" loading="lazy"
+    style="--a:${p.accent}" onerror="this.outerHTML=bandFallback('${p.accent}')">`;
+  return bandFallback(p.accent);
+}
+function bandFallback(c){
   return `<div class="band-art" style="--a:${c};--t:${tint_(c,.24)}"></div>`;
 }
 
@@ -1034,7 +1041,7 @@ function open(id){
     <p class="kicker">${p.region}</p>
     <h2>${p.name}</h2>
     <p class="tag">${p.tag}</p>
-  </div>${horizon(p.horizon,p.accent)}</div>
+  </div>${horizon(p)}</div>
 
   <dl class="vitals">
     <div class="vital"><dt>Go when</dt><dd>${p.when}</dd></div>
